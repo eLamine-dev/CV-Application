@@ -31,13 +31,16 @@ function App() {
       setSelectedResume(selected);
    };
 
+   const openResumeManager = () => {};
+
    return (
       <div>
-         <Header onNewResume={handleCreateNewResume} />
+         <Header onOpenResumeManager={openResumeManager} />
 
          <ResumeManager
             resumes={resumes}
             selectedResume={selectedResume}
+            onNewResume={handleCreateNewResume}
             onSelectResume={handleSelectResume}
             onDeleteResume={handleDeleteResume}
          />
