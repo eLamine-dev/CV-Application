@@ -31,6 +31,10 @@ function App() {
       setSelectedResume(selected);
    };
 
+   const handleEditEntry = (category, entryId, NewData) => {};
+   const handleAddNewEntry = (category, entry) => {};
+   const handleDeleteEntry = (category, entryId) => {};
+
    const openResumeManager = () => {};
 
    return (
@@ -45,7 +49,12 @@ function App() {
             onDeleteResume={handleDeleteResume}
          />
 
-         <ResumeEditor selectedResume={selectedResume} />
+         <ResumeEditor
+            selectedResume={selectedResume}
+            onEditResumeEntry={handleEditEntry}
+            onAddNewResumeEntry={handleAddNewEntry}
+            onDeleteResumeEntry={handleDeleteEntry}
+         />
 
          <ResumeView selectedResume={selectedResume} />
       </div>
