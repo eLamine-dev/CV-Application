@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import './App.css';
-import Header from './Header';
-import ResumeManager from './ResumeManager';
-import ResumeEditor from './ResumeEditor';
-import ResumeView from './ResumeView';
+import Header from './components/Header';
+import ResumeManager from './components/ResumeManager';
+import ResumeEditor from './components/ResumeEditor';
+import ResumeView from './components/ResumeView';
+import './styles/App.css';
 
 function App() {
    const [resumes, setResumes] = useState([]);
@@ -39,7 +39,7 @@ function App() {
 
    return (
       <div>
-         <Header onOpenResumeManager={openResumeManager} />
+         <Header />
 
          <ResumeManager
             resumes={resumes}

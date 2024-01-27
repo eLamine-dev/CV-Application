@@ -1,4 +1,5 @@
-import config from './Config';
+import config from './resumeEditor/Config';
+import { useState } from 'react';
 
 function ResumeEditor({
    selectedResume,
@@ -34,10 +35,7 @@ function ResumeEditor({
          <h2>Edit {activeTab}:</h2>
          <div>
             {config[activeTab].map((field) => (
-               <div key={field.id}>
-                  <strong>{field.label}:</strong>{' '}
-                  {selectedEntry && selectedEntry[field.id]}
-               </div>
+               <div key={field.id}></div>
             ))}
             {selectedResume && selectedResume[activeTab] && (
                <div>
