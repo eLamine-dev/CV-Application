@@ -1,4 +1,5 @@
 import config from './resumeEditor/Config';
+import CategoryTabs from './resumeEditor/CategoryTabs';
 import { useState } from 'react';
 
 function ResumeEditor({
@@ -32,8 +33,14 @@ function ResumeEditor({
 
    return (
       <div>
+         <CategoryTabs
+            config={config}
+            setActiveTab={handleTabChange}
+            activeTab={activeTab}
+         />
          <h2>Edit {activeTab}:</h2>
-         <div>
+
+         {/* <div>
             {config[activeTab].map((field) => (
                <div key={field.id}></div>
             ))}
@@ -55,7 +62,7 @@ function ResumeEditor({
                   </button>
                </div>
             )}
-         </div>
+         </div> */}
          {renderFormInputs()}
          <button onClick={handleSave}>Save</button>
       </div>

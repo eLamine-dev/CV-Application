@@ -5,7 +5,7 @@
 // import Skills from './resumeView/Skills.jsx';
 // import Languages from './resumeView/Languages';
 
-const ResumeView = ({ selectedResume }) => {
+function ResumeView({ selectedResume }) {
    if (!selectedResume) {
       return <div>Select a resume to view</div>;
    }
@@ -20,6 +20,6 @@ const ResumeView = ({ selectedResume }) => {
          <Languages languagesData={selectedResume.languages || []} />
       </div>
    );
-};
+}
 
 export default ResumeView;

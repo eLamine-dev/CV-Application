@@ -1,5 +1,5 @@
 const config = {
-   generalInfo: [
+   'general Info': [
       { id: 'fullName', type: 'input', label: 'Full Name' },
       { id: 'email', type: 'input', label: 'Email' },
       { id: 'phone', type: 'input', label: 'Phone' },
