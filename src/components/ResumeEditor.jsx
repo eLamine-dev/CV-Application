@@ -1,6 +1,7 @@
 import config from './resumeEditor/Config';
 import CategoryTabs from './resumeEditor/CategoryTabs';
 import { useState } from 'react';
+import CategoryForm from './resumeEditor/CategoryForm';
 
 function ResumeEditor({
    selectedResume,
@@ -8,7 +9,7 @@ function ResumeEditor({
    onAddNewEntry,
    onDeleteEntry,
 }) {
-   const [activeTab, setActiveTab] = useState('generalInfo');
+   const [activeTab, setActiveTab] = useState('education');
    const [formData, setFormData] = useState({});
 
    const handleInputChange = (fieldId, value) => {};
@@ -38,33 +39,17 @@ function ResumeEditor({
             setActiveTab={handleTabChange}
             activeTab={activeTab}
          />
+         <CategoryForm selectedResume={selectedResume} activeTab={activeTab} />
+
          <h2>Edit {activeTab}:</h2>
 
          {/* <div>
             {config[activeTab].map((field) => (
                <div key={field.id}></div>
             ))}
-            {selectedResume && selectedResume[activeTab] && (
-               <div>
-                  <button
-                     onClick={() =>
-                        handleEditEntry(selectedResume[activeTab][0])
-                     }
-                  >
-                     Edit
-                  </button>
-                  <button
-                     onClick={() =>
-                        handleDeleteEntry(selectedResume[activeTab][0].id)
-                     }
-                  >
-                     Delete
-                  </button>
-               </div>
-            )}
-         </div> */}
+         </div>
          {renderFormInputs()}
-         <button onClick={handleSave}>Save</button>
+         <button onClick={handleSave}>Save</button> */}
       </div>
    );
 }

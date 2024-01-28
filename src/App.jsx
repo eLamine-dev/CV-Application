@@ -3,11 +3,12 @@ import Header from './components/Header';
 import ResumeManager from './components/ResumeManager';
 import ResumeEditor from './components/ResumeEditor';
 import ResumeView from './components/ResumeView';
+import sampleResume from './components/sampleResume';
 import './styles/App.css';
 
 function App() {
    const [resumes, setResumes] = useState([]);
-   const [selectedResume, setSelectedResume] = useState(null);
+   const [selectedResume, setSelectedResume] = useState(sampleResume);
 
    const handleCreateNewResume = (newResumeName) => {
       if (newResumeName.trim() !== '') {
@@ -56,7 +57,7 @@ function App() {
             onDeleteResumeEntry={handleDeleteEntry}
          />
 
-         <ResumeView selectedResume={selectedResume} />
+         {/* <ResumeView selectedResume={selectedResume} /> */}
       </div>
    );
 }
