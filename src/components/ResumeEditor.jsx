@@ -39,9 +39,12 @@ function ResumeEditor({
             setActiveTab={handleTabChange}
             activeTab={activeTab}
          />
-         <CategoryForm selectedResume={selectedResume} activeTab={activeTab} />
-
          <h2>Edit {activeTab}:</h2>
+         <CategoryForm
+            selectedResume={selectedResume}
+            activeTab={activeTab}
+            config={config}
+         />
 
          {/* <div>
             {config[activeTab].map((field) => (
