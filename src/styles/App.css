@@ -4,3 +4,13 @@
    padding: 2rem;
    text-align: center;
 }
+
+/* .ResumeManager,
+.ResumeEditor {
+   border: solid black 2px;
+} */
+
+.ResumeEditor {
+   display: flex;
+   height: 600px;
+}

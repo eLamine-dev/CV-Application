@@ -1,7 +1,7 @@
-import config from './resumeEditor/Config';
-import CategoryTabs from './resumeEditor/CategoryTabs';
 import { useState } from 'react';
-import CategoryForm from './resumeEditor/CategoryForm';
+import config from './resumeEditor/Config';
+import ElementsTabs from './resumeEditor/ElementsTabs';
+import ElementForm from './resumeEditor/ElementForm';
 
 function ResumeEditor({
    selectedResume,
@@ -33,14 +33,14 @@ function ResumeEditor({
    };
 
    return (
-      <div>
-         <CategoryTabs
+      <div className="ResumeEditor">
+         <ElementsTabs
             config={config}
             setActiveTab={handleTabChange}
             activeTab={activeTab}
          />
-         <h2>Edit {activeTab}:</h2>
-         <CategoryForm
+
+         <ElementForm
             selectedResume={selectedResume}
             activeTab={activeTab}
             config={config}

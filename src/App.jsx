@@ -7,7 +7,7 @@ import sampleResume from './components/sampleResume';
 import './styles/App.css';
 
 function App() {
-   const [resumes, setResumes] = useState([]);
+   const [resumes, setResumes] = useState([sampleResume]);
    const [selectedResume, setSelectedResume] = useState(sampleResume);
 
    const handleCreateNewResume = (newResumeName) => {
@@ -40,7 +40,7 @@ function App() {
 
    return (
       <div>
-         <Header />
+         {/* <Header /> */}
 
          <ResumeManager
             resumes={resumes}

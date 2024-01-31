@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Stack, Button, Chip, Box } from '@mui/material';
 
 function ResumeManager({
    resumes,
@@ -18,22 +19,28 @@ function ResumeManager({
       }
    };
 
+   const deleteResume = () => {};
+
    return (
-      <div>
+      <Box className="ResumeManager">
          <h2>Resumes Management</h2>
 
-         <ul>
+         <Stack>
             {resumes.map((resume) => (
-               <li key={resume.id}>
-                  <button onClick={() => onSelectResume(resume.id)}>
+               <Chip
+                  onDelete={deleteResume}
+                  key={resume.id}
+                  label={resume.name}
+               >
+                  {/* <Button onClick={() => onSelectResume(resume.id)}>
                      {resume.name}
-                  </button>
-                  <button onClick={() => onDeleteResume(resume.id)}>
+                  </Button>
+                  <Button onClick={() => onDeleteResume(resume.id)}>
                      Delete
-                  </button>
-               </li>
+                  </Button> */}
+               </Chip>
             ))}
-         </ul>
+         </Stack>
 
          {resumes.length === 0 && (
             <p>No resumes available. Create a new one!</p>
@@ -64,7 +71,7 @@ function ResumeManager({
          )}
 
          <button>Close</button>
-      </div>
+      </Box>
    );
 }
 

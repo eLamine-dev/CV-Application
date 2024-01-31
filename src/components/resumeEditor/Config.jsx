@@ -1,5 +1,4 @@
-import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
+import { TextField, Select } from '@mui/material';
 
 const config = {
    'general Info': [
@@ -22,8 +21,8 @@ const config = {
       { id: 'school', component: TextField, type: 'text', label: 'School' },
       {
          id: 'graduationYear',
-         component: TextField,
-         type: 'text',
+         component: 'date',
+
          label: 'Graduation Year',
       },
    ],
@@ -89,7 +88,7 @@ const config = {
 //       { id: 'address', type: 'textarea', label: 'Address' },
 //    ],
 //    education: [
-//       { id: 'degree', type: 'input', label: 'Degree' },
+//       { id: 'degree', fieldType: 'input', type label: 'Degree' },
 //       { id: 'school', type: 'input', label: 'School' },
 //       { id: 'graduationYear', type: 'input', label: 'Graduation Year' },
 //    ],

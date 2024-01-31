@@ -1,9 +1,14 @@
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-function CategoryTabs({ config, setActiveTab, activeTab }) {
+function ElementsTabs({ config, setActiveTab, activeTab }) {
    return (
-      <Tabs value={activeTab} aria-label="basic tabs example">
+      <Tabs
+         orientation="vertical"
+         variant="scrollable"
+         value={activeTab}
+         aria-label="basic tabs example"
+      >
          {Object.keys(config).map((key, index) => {
             return (
                <Tab
@@ -20,4 +25,4 @@ function CategoryTabs({ config, setActiveTab, activeTab }) {
    );
 }
 
-export default CategoryTabs;
+export default ElementsTabs;
