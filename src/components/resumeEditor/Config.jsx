@@ -1,4 +1,5 @@
 import { TextField, Select } from '@mui/material';
+import { DateField } from '@mui/x-date-pickers';
 
 const config = {
    'general Info': [
@@ -21,8 +22,7 @@ const config = {
       { id: 'school', component: TextField, type: 'text', label: 'School' },
       {
          id: 'graduationYear',
-         component: 'date',
-
+         component: DateField,
          label: 'Graduation Year',
       },
    ],

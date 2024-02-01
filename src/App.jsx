@@ -32,9 +32,25 @@ function App() {
       setSelectedResume(selected);
    };
 
-   const handleEditEntry = (category, entryId, NewData) => {};
-   const handleAddNewEntry = (category, entry) => {};
-   const handleDeleteEntry = (category, entryId) => {};
+   const handleSaveEntry = (category, data) => {
+      if (data.id) {
+         const updatedEntries = selectedResume[category].map((entry) =>
+            entry.id === data.id ? { ...entry, ...data } : entry
+         );
+
+         setSelectedResume((prevResume) => ({
+            ...prevResume,
+            [category]: updatedEntries,
+         }));
+      } else {
+         const newEntry = { ...data, id: Date.now() };
+
+         setSelectedResume((prevResume) => ({
+            ...prevResume,
+            [category]: [...prevResume[category], newEntry],
+         }));
+      }
+   };
 
    const openResumeManager = () => {};
 
@@ -52,9 +68,7 @@ function App() {
 
          <ResumeEditor
             selectedResume={selectedResume}
-            onEditResumeEntry={handleEditEntry}
-            onAddNewResumeEntry={handleAddNewEntry}
-            onDeleteResumeEntry={handleDeleteEntry}
+            onSaveEntry={handleSaveEntry}
          />
 
          {/* <ResumeView selectedResume={selectedResume} /> */}

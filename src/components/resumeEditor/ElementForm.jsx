@@ -1,5 +1,8 @@
 import { createElement, useState } from 'react';
-
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateField } from '@mui/x-date-pickers/DateField';
 import {
    TextField,
    Select,
@@ -11,7 +14,7 @@ import {
    Chip,
 } from '@mui/material';
 
-function ElementForm({ activeTab, selectedResume, config, saveData }) {
+function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
    const [formData, setFormData] = useState({});
    const [selectedEntry, setSelectedEntry] = useState(null);
 
@@ -21,6 +24,7 @@ function ElementForm({ activeTab, selectedResume, config, saveData }) {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      onSaveData(activeTab, formData);
    };
 
    const deleteEntry = (e) => {
@@ -33,6 +37,10 @@ function ElementForm({ activeTab, selectedResume, config, saveData }) {
             {selectedResume[activeTab].map((entry, index) => {
                return (
                   <Chip
+                     onClick={() => {
+                        setSelectedEntry(entry);
+                        setFormData(entry);
+                     }}
                      onDelete={deleteEntry}
                      key={index}
                      label={`${Object.values(entry)[1]} - ${
@@ -53,8 +61,10 @@ function ElementForm({ activeTab, selectedResume, config, saveData }) {
                            placeholder: field.label,
                            multiline: field.multiline || false,
                            size: 'small',
-                           onChange: (e) =>
-                              handleInputChange(field.id, e.target.value),
+                           value: formData[field.id] || '',
+                           onChange: (e) => {
+                              handleInputChange(field.id, e.target.value);
+                           },
                         })}
                      {field.component === Select && (
                         <FormControl sx={{ m: 1, minWidth: 180 }}>
@@ -62,6 +72,7 @@ function ElementForm({ activeTab, selectedResume, config, saveData }) {
                            {createElement(
                               field.component,
                               {
+                                 size: 'small',
                                  label: field.label,
                                  value: formData[field.id] || '',
                                  onChange: (e) =>
@@ -77,11 +88,14 @@ function ElementForm({ activeTab, selectedResume, config, saveData }) {
                            )}
                         </FormControl>
                      )}
-                     {field.component === 'date' && <input type="date" />}
+                     {field.component === DateField && (
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                           <DateField size="small" label={field.label} />
+                        </LocalizationProvider>
+                     )}
                   </div>
                );
             })}
-
             <button type="submit">Save</button>
          </form>
       </div>

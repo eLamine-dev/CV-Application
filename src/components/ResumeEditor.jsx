@@ -3,12 +3,7 @@ import config from './resumeEditor/Config';
 import ElementsTabs from './resumeEditor/ElementsTabs';
 import ElementForm from './resumeEditor/ElementForm';
 
-function ResumeEditor({
-   selectedResume,
-   onEditEntry,
-   onAddNewEntry,
-   onDeleteEntry,
-}) {
+function ResumeEditor({ selectedResume, onSaveEntry }) {
    const [activeTab, setActiveTab] = useState('education');
    const [formData, setFormData] = useState({});
 
@@ -20,16 +15,9 @@ function ResumeEditor({
       setActiveTab(tab);
    };
 
-   const handleSave = () => {};
-
-   const handleDeleteEntry = (entryId) => {
-      onDeleteEntry(activeTab, entryId);
+   const handleSaveDada = () => {
+      onSaveEntry(activeTab, formData);
       setFormData({});
-   };
-
-   const handleEditEntry = (entry) => {
-      setSelectedEntry(entry);
-      setFormData(entry);
    };
 
    return (
@@ -44,6 +32,7 @@ function ResumeEditor({
             selectedResume={selectedResume}
             activeTab={activeTab}
             config={config}
+            onSaveData={handleSaveDada}
          />
 
          {/* <div>
