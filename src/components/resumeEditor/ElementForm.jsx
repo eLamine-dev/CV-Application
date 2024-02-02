@@ -16,7 +16,7 @@ import {
 
 function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
    const [formData, setFormData] = useState({});
-   const [selectedEntry, setSelectedEntry] = useState(null);
+   // const [selectedEntry, setSelectedEntry] = useState(null);
 
    const handleInputChange = (fieldId, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldId]: value }));
@@ -25,6 +25,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
    const handleSubmit = (e) => {
       e.preventDefault();
       onSaveData(activeTab, formData);
+      setFormData({});
    };
 
    const deleteEntry = (e) => {
@@ -38,7 +39,6 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
                return (
                   <Chip
                      onClick={() => {
-                        setSelectedEntry(entry);
                         setFormData(entry);
                      }}
                      onDelete={deleteEntry}
@@ -50,7 +50,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
                );
             })}
          </Stack>
-         <form onSubmit={handleSubmit}>
+         <form id="editing-form" onSubmit={handleSubmit}>
             {config[activeTab].map((field, index) => {
                return (
                   <div key={index}>
@@ -90,7 +90,11 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
                      )}
                      {field.component === DateField && (
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                           <DateField size="small" label={field.label} />
+                           <DateField
+                              value=""
+                              size="small"
+                              label={field.label}
+                           />
                         </LocalizationProvider>
                      )}
                   </div>

@@ -5,19 +5,13 @@ import ElementForm from './resumeEditor/ElementForm';
 
 function ResumeEditor({ selectedResume, onSaveEntry }) {
    const [activeTab, setActiveTab] = useState('education');
-   const [formData, setFormData] = useState({});
-
-   const handleInputChange = (fieldId, value) => {};
-
-   const renderFormInputs = () => {};
 
    const handleTabChange = (tab) => {
       setActiveTab(tab);
    };
 
-   const handleSaveDada = () => {
+   const handleSaveDada = (activeTab, formData) => {
       onSaveEntry(activeTab, formData);
-      setFormData({});
    };
 
    return (
