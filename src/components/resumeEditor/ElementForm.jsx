@@ -27,7 +27,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      onSaveData(activeTab, formData);
+      onSaveData(formData);
       setFormData({});
       let dateFields = config[activeTab].filter(
          (field) => field.component === DatePicker

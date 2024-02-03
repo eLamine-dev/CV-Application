@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import ResumeManager from './components/ResumeManager';
 import ResumeEditor from './components/ResumeEditor';
@@ -8,7 +8,9 @@ import './styles/App.css';
 
 function App() {
    const [resumes, setResumes] = useState([sampleResume]);
-   const [selectedResume, setSelectedResume] = useState(sampleResume);
+   const [selectedResume, setSelectedResume] = useState(null);
+
+   useEffect(() => console.log(resumes));
 
    const handleCreateNewResume = (newResumeName) => {
       if (newResumeName.trim() !== '') {

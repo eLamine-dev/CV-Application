@@ -1,5 +1,5 @@
 const sampleResume = {
-   id: 1,
+   id: 'id01',
    name: 'John Doe',
    generalInfo: [
       { id: 'fullName', value: 'John Doe' },

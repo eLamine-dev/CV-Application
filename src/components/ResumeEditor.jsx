@@ -10,7 +10,7 @@ function ResumeEditor({ selectedResume, onSaveEntry }) {
       setActiveTab(tab);
    };
 
-   const handleSaveDada = (activeTab, formData) => {
+   const handleSaveDada = (formData) => {
       onSaveEntry(activeTab, formData);
    };
 
