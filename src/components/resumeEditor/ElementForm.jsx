@@ -1,8 +1,8 @@
-import { createElement, useState } from 'react';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { createElement, useReducer, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
+
 import {
    TextField,
    Select,
@@ -13,6 +13,8 @@ import {
    Button,
    Chip,
 } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 
 function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
    const [formData, setFormData] = useState({});
@@ -20,12 +22,19 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
 
    const handleInputChange = (fieldId, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldId]: value }));
+      console.log(formData);
    };
 
    const handleSubmit = (e) => {
       e.preventDefault();
       onSaveData(activeTab, formData);
       setFormData({});
+      let dateFields = config[activeTab].filter(
+         (field) => field.component === DatePicker
+      );
+      dateFields.forEach((field) => {
+         setFormData((prevData) => ({ ...prevData, [field.id]: null }));
+      });
    };
 
    const deleteEntry = (e) => {
@@ -38,6 +47,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
             {selectedResume[activeTab].map((entry, index) => {
                return (
                   <Chip
+                     variant="outlined"
                      onClick={() => {
                         setFormData(entry);
                      }}
@@ -56,6 +66,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
                   <div key={index}>
                      {field.component === TextField &&
                         createElement(field.component, {
+                           id: field.id,
                            key: index,
                            label: field.label,
                            placeholder: field.label,
@@ -72,9 +83,10 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
                            {createElement(
                               field.component,
                               {
+                                 id: field.id,
                                  size: 'small',
                                  label: field.label,
-                                 value: formData[field.id] || '',
+                                 value: formData[field.id] || null,
                                  onChange: (e) =>
                                     handleInputChange(field.id, e.target.value),
                               },
@@ -91,9 +103,15 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
                      {field.component === DateField && (
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                            <DateField
-                              value=""
+                              id={field.id}
                               size="small"
-                              label={field.label}
+                              label="Date"
+                              value={
+                                 formData[field.id] ? formData[field.id] : null
+                              }
+                              onChange={(date) => {
+                                 handleInputChange(field.id, dayjs(date));
+                              }}
                            />
                         </LocalizationProvider>
                      )}
