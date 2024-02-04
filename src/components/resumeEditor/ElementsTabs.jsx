@@ -3,12 +3,7 @@ import Tab from '@mui/material/Tab';
 
 function ElementsTabs({ config, setActiveTab, activeTab }) {
    return (
-      <Tabs
-         orientation="vertical"
-         variant="scrollable"
-         value={activeTab}
-         aria-label="basic tabs example"
-      >
+      <Tabs orientation="vertical" variant="scrollable" value={activeTab}>
          {Object.keys(config).map((key, index) => {
             return (
                <Tab

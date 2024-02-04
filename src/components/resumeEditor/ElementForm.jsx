@@ -22,7 +22,6 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
 
    const handleInputChange = (fieldId, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldId]: value }));
-      console.log(formData);
    };
 
    const handleSubmit = (e) => {
@@ -43,23 +42,25 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
 
    return (
       <div className="ElementForm">
-         <Stack>
-            {selectedResume[activeTab].map((entry, index) => {
-               return (
-                  <Chip
-                     variant="outlined"
-                     onClick={() => {
-                        setFormData(entry);
-                     }}
-                     onDelete={deleteEntry}
-                     key={index}
-                     label={`${Object.values(entry)[1]} - ${
-                        Object.values(entry)[2]
-                     }`}
-                  ></Chip>
-               );
-            })}
-         </Stack>
+         {selectedResume[activeTab] && (
+            <Stack>
+               {selectedResume[activeTab].map((entry, index) => {
+                  return (
+                     <Chip
+                        variant="outlined"
+                        onClick={() => {
+                           setFormData(entry);
+                        }}
+                        onDelete={deleteEntry}
+                        key={index}
+                        label={`${Object.values(entry)[1]} - ${
+                           Object.values(entry)[2]
+                        }`}
+                     ></Chip>
+                  );
+               })}
+            </Stack>
+         )}
          <form id="editing-form" onSubmit={handleSubmit}>
             {config[activeTab].map((field, index) => {
                return (
@@ -86,7 +87,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
                                  id: field.id,
                                  size: 'small',
                                  label: field.label,
-                                 value: formData[field.id] || null,
+                                 value: formData[field.id] || '',
                                  onChange: (e) =>
                                     handleInputChange(field.id, e.target.value),
                               },
@@ -105,7 +106,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
                            <DateField
                               id={field.id}
                               size="small"
-                              label="Date"
+                              label={field.label}
                               value={
                                  formData[field.id] ? formData[field.id] : null
                               }

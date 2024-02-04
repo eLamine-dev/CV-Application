@@ -4,7 +4,7 @@ import ElementsTabs from './resumeEditor/ElementsTabs';
 import ElementForm from './resumeEditor/ElementForm';
 
 function ResumeEditor({ selectedResume, onSaveEntry }) {
-   const [activeTab, setActiveTab] = useState('education');
+   const [activeTab, setActiveTab] = useState('general info');
 
    const handleTabChange = (tab) => {
       setActiveTab(tab);

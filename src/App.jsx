@@ -8,7 +8,7 @@ import './styles/App.css';
 
 function App() {
    const [resumes, setResumes] = useState([sampleResume]);
-   const [selectedResume, setSelectedResume] = useState(null);
+   const [selectedResumeId, setSelectedResumeId] = useState('id01');
 
    useEffect(() => console.log(resumes));
 
@@ -16,7 +16,7 @@ function App() {
       if (newResumeName.trim() !== '') {
          const newResume = {
             name: newResumeName,
-            id: Date.now(),
+            id: Date.now().toString(),
          };
 
          setResumes([...resumes, newResume]);
@@ -26,35 +26,33 @@ function App() {
    const handleDeleteResume = (resumeId) => {
       const updatedResumes = resumes.filter((resume) => resume.id !== resumeId);
       setResumes(updatedResumes);
-      setSelectedResume(null);
+      setSelectedResumeId(null);
    };
 
    const handleSelectResume = (resumeId) => {
-      const selected = resumes.find((resume) => resume.id === resumeId);
-      setSelectedResume(selected);
+      setSelectedResumeId(resumeId);
    };
 
    const handleSaveEntry = (category, data) => {
-      if (data.id) {
-         const updatedEntries = selectedResume[category].map((entry) =>
-            entry.id === data.id ? { ...entry, ...data } : entry
-         );
+      const updatedResumes = resumes.map((resume) => {
+         if (resume.id === selectedResumeId) {
+            return {
+               ...resume,
+               [category]: data.id
+                  ? resume[category].map((entry) =>
+                       entry.id === data.id ? { ...entry, ...data } : entry
+                    )
+                  : [
+                       ...resume[category],
+                       { ...data, id: Date.now().toString() },
+                    ],
+            };
+         }
+         return resume;
+      });
 
-         setSelectedResume((prevResume) => ({
-            ...prevResume,
-            [category]: updatedEntries,
-         }));
-      } else {
-         const newEntry = { ...data, id: Date.now() };
-
-         setSelectedResume((prevResume) => ({
-            ...prevResume,
-            [category]: [...prevResume[category], newEntry],
-         }));
-      }
+      setResumes(updatedResumes);
    };
-
-   const openResumeManager = () => {};
 
    return (
       <div>
@@ -62,14 +60,16 @@ function App() {
 
          <ResumeManager
             resumes={resumes}
-            selectedResume={selectedResume}
+            selectedResumeId={selectedResumeId}
             onNewResume={handleCreateNewResume}
             onSelectResume={handleSelectResume}
             onDeleteResume={handleDeleteResume}
          />
 
          <ResumeEditor
-            selectedResume={selectedResume}
+            selectedResume={resumes.find(
+               (resume) => resume.id === selectedResumeId
+            )}
             onSaveEntry={handleSaveEntry}
          />
 

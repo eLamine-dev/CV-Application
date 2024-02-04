@@ -29,6 +29,7 @@ function ResumeManager({
             {resumes.map((resume) => (
                <Chip
                   onDelete={deleteResume}
+                  onClick={() => onSelectResume(resume.id)}
                   key={resume.id}
                   label={resume.name}
                >

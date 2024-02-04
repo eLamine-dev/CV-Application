@@ -1,15 +1,20 @@
 const sampleResume = {
    id: 'id01',
-   name: 'John Doe',
-   generalInfo: [
-      { id: 'fullName', value: 'John Doe' },
-      { id: 'email', value: 'john.doe@example.com' },
-      { id: 'phone', value: '123-456-7890' },
-      { id: 'address', value: '123 Main Street, Cityville' },
+   name: 'Sample resume',
+   'general info': [
+      {
+         label: 'general info',
+         fullName: 'John Doe',
+         jobTitle: 'Software Developer',
+         email: 'john.doe@example.com',
+         phone: '123-456-7890',
+         address: '123 Main Street, City ville',
+      },
    ],
    education: [
       {
-         id: 1,
+         id: 'ed01',
+         label: 'education',
          degree: 'Bch Sc. Computer science',
          school: 'University of Example',
          graduationYear: '2022',
@@ -17,7 +22,8 @@ const sampleResume = {
    ],
    experience: [
       {
-         id: 1,
+         id: 'ex01',
+         label: 'experience',
          position: 'Software Developer',
          company: 'Tech Solutions Inc.',
          workDescription: 'Developed web applications using React and Node.js.',
@@ -25,14 +31,29 @@ const sampleResume = {
    ],
    projects: [
       {
-         id: 1,
+         id: 'pr01',
+         label: 'projects',
          projectName: 'Portfolio Website',
          description: 'Designed and developed a personal portfolio website.',
          projectLink: 'https://example.com/portfolio',
       },
    ],
-   skills: [{ id: 1, skillName: 'JavaScript', proficiency: 'Intermediate' }],
-   languages: [{ id: 1, language: 'English', proficiency: 'Fluent' }],
+   skills: [
+      {
+         id: 'sl01',
+         label: 'skills',
+         skillName: 'JavaScript',
+         proficiency: 'Intermediate',
+      },
+   ],
+   languages: [
+      {
+         id: 'lg01',
+         label: 'languages',
+         language: 'English',
+         proficiency: 'Fluent',
+      },
+   ],
 };
 
 export default sampleResume;
