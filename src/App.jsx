@@ -10,7 +10,9 @@ function App() {
    const [resumes, setResumes] = useState([sampleResume]);
    const [selectedResumeId, setSelectedResumeId] = useState('id01');
 
-   useEffect(() => console.log(resumes));
+   useEffect(() => {
+      console.log(resumes);
+   });
 
    const handleCreateNewResume = (newResumeName) => {
       if (newResumeName.trim() !== '') {
@@ -39,11 +41,11 @@ function App() {
             return {
                ...resume,
                [category]: data.id
-                  ? resume[category].map((entry) =>
+                  ? (resume[category] || []).map((entry) =>
                        entry.id === data.id ? { ...entry, ...data } : entry
                     )
                   : [
-                       ...resume[category],
+                       ...(resume[category] || []),
                        { ...data, id: Date.now().toString() },
                     ],
             };
@@ -67,6 +69,7 @@ function App() {
          />
 
          <ResumeEditor
+            selectedResumeId={selectedResumeId}
             selectedResume={resumes.find(
                (resume) => resume.id === selectedResumeId
             )}

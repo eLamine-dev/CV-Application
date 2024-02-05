@@ -17,7 +17,7 @@ const sampleResume = {
          label: 'education',
          degree: 'Bch Sc. Computer science',
          school: 'University of Example',
-         graduationYear: '2022',
+         graduationYear: new Date('2011-11-11'),
       },
    ],
    experience: [

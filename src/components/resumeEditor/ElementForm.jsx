@@ -1,4 +1,4 @@
-import { createElement, useReducer, useState } from 'react';
+import { createElement, useEffect, useReducer, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
@@ -13,12 +13,22 @@ import {
    Button,
    Chip,
 } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
+
 import dayjs from 'dayjs';
 
-function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
-   const [formData, setFormData] = useState({});
-   // const [selectedEntry, setSelectedEntry] = useState(null);
+function ElementForm({
+   formData,
+   setFormData,
+   activeTab,
+   selectedResume,
+   selectedResumeId,
+   config,
+   onSaveData,
+   resetFormData,
+}) {
+   useEffect(() => {
+      resetFormData();
+   }, [selectedResumeId]);
 
    const handleInputChange = (fieldId, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldId]: value }));
@@ -27,13 +37,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
    const handleSubmit = (e) => {
       e.preventDefault();
       onSaveData(formData);
-      setFormData({});
-      let dateFields = config[activeTab].filter(
-         (field) => field.component === DatePicker
-      );
-      dateFields.forEach((field) => {
-         setFormData((prevData) => ({ ...prevData, [field.id]: null }));
-      });
+      resetFormData();
    };
 
    const deleteEntry = (e) => {

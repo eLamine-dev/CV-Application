@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import config from './resumeEditor/Config';
 import ElementsTabs from './resumeEditor/ElementsTabs';
 import ElementForm from './resumeEditor/ElementForm';
+import { DatePicker } from '@mui/x-date-pickers';
 
-function ResumeEditor({ selectedResume, onSaveEntry }) {
+function ResumeEditor({ selectedResumeId, selectedResume, onSaveEntry }) {
    const [activeTab, setActiveTab] = useState('general info');
+   const [formData, setFormData] = useState({});
+
+   const resetFormData = () => {
+      setFormData({});
+      let dateFields = config[activeTab].filter(
+         (field) => field.component === DatePicker
+      );
+      dateFields.forEach((field) => {
+         setFormData((prevData) => ({ ...prevData, [field.id]: null }));
+      });
+   };
 
    const handleTabChange = (tab) => {
       setActiveTab(tab);
@@ -23,10 +35,14 @@ function ResumeEditor({ selectedResume, onSaveEntry }) {
          />
 
          <ElementForm
-            selectedResume={selectedResume}
+            formData={formData}
+            setFormData={setFormData}
             activeTab={activeTab}
+            selectedResumeId={selectedResumeId}
+            selectedResume={selectedResume}
             config={config}
             onSaveData={handleSaveDada}
+            resetFormData={resetFormData}
          />
 
          {/* <div>
