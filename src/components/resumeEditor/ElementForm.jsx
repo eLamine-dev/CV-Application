@@ -28,6 +28,9 @@ function ElementForm({
 }) {
    useEffect(() => {
       resetFormData();
+      if (activeTab === 'general info' && selectedResume[activeTab]) {
+         setFormData(selectedResume[activeTab][0]);
+      }
    }, [selectedResumeId]);
 
    const handleInputChange = (fieldId, value) => {
@@ -46,7 +49,7 @@ function ElementForm({
 
    return (
       <div className="ElementForm">
-         {selectedResume[activeTab] && (
+         {activeTab !== 'general info' && selectedResume[activeTab] && (
             <Stack>
                {selectedResume[activeTab].map((entry, index) => {
                   return (

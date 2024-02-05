@@ -3,6 +3,7 @@ const sampleResume = {
    name: 'Sample resume',
    'general info': [
       {
+         id: 'gi01',
          label: 'general info',
          fullName: 'John Doe',
          jobTitle: 'Software Developer',
