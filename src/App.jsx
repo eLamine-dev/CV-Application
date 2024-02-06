@@ -11,7 +11,7 @@ function App() {
    const [selectedResumeId, setSelectedResumeId] = useState('id01');
 
    useEffect(() => {
-      console.log(resumes);
+      const selectedResume = console.log(resumes);
    });
 
    const handleCreateNewResume = (newResumeName) => {
@@ -59,7 +59,6 @@ function App() {
    return (
       <div>
          {/* <Header /> */}
-
          <ResumeManager
             resumes={resumes}
             selectedResumeId={selectedResumeId}
@@ -75,7 +74,6 @@ function App() {
             )}
             onSaveEntry={handleSaveEntry}
          />
-
          {/* <ResumeView selectedResume={selectedResume} /> */}
       </div>
    );

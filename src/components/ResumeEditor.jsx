@@ -8,6 +8,10 @@ function ResumeEditor({ selectedResumeId, selectedResume, onSaveEntry }) {
    const [activeTab, setActiveTab] = useState('general info');
    const [formData, setFormData] = useState({});
 
+   useEffect(() => {
+      resetFormData();
+   }, [selectedResumeId, activeTab]);
+
    const resetFormData = () => {
       setFormData({});
       let dateFields = config[activeTab].filter(
@@ -16,6 +20,12 @@ function ResumeEditor({ selectedResumeId, selectedResume, onSaveEntry }) {
       dateFields.forEach((field) => {
          setFormData((prevData) => ({ ...prevData, [field.id]: null }));
       });
+      if (activeTab === 'general info') {
+         setFormData((prevData) => ({
+            ...prevData,
+            ...selectedResume['general info'][0],
+         }));
+      }
    };
 
    const handleTabChange = (tab) => {
@@ -24,6 +34,7 @@ function ResumeEditor({ selectedResumeId, selectedResume, onSaveEntry }) {
 
    const handleSaveDada = (formData) => {
       onSaveEntry(activeTab, formData);
+      resetFormData();
    };
 
    return (
@@ -38,8 +49,8 @@ function ResumeEditor({ selectedResumeId, selectedResume, onSaveEntry }) {
             formData={formData}
             setFormData={setFormData}
             activeTab={activeTab}
-            selectedResumeId={selectedResumeId}
             selectedResume={selectedResume}
+            selectedResumeId={selectedResumeId}
             config={config}
             onSaveData={handleSaveDada}
             resetFormData={resetFormData}

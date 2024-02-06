@@ -26,21 +26,14 @@ function ElementForm({
    onSaveData,
    resetFormData,
 }) {
-   useEffect(() => {
-      resetFormData();
-      if (activeTab === 'general info' && selectedResume[activeTab]) {
-         setFormData(selectedResume[activeTab][0]);
-      }
-   }, [selectedResumeId]);
-
    const handleInputChange = (fieldId, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldId]: value }));
    };
 
    const handleSubmit = (e) => {
       e.preventDefault();
+
       onSaveData(formData);
-      resetFormData();
    };
 
    const deleteEntry = (e) => {
