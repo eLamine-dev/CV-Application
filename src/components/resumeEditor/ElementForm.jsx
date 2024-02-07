@@ -21,10 +21,9 @@ function ElementForm({
    setFormData,
    activeTab,
    selectedResume,
-   selectedResumeId,
+
    config,
    onSaveData,
-   resetFormData,
 }) {
    const handleInputChange = (fieldId, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldId]: value }));

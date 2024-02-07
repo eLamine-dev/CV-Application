@@ -11,7 +11,7 @@ function App() {
    const [selectedResumeId, setSelectedResumeId] = useState('id01');
 
    useEffect(() => {
-      const selectedResume = console.log(resumes);
+      console.log(resumes);
    });
 
    const handleCreateNewResume = (newResumeName) => {
@@ -19,6 +19,7 @@ function App() {
          const newResume = {
             name: newResumeName,
             id: Date.now().toString(),
+            'general info': [],
          };
 
          setResumes([...resumes, newResume]);
@@ -68,10 +69,8 @@ function App() {
          />
 
          <ResumeEditor
+            resumes={resumes}
             selectedResumeId={selectedResumeId}
-            selectedResume={resumes.find(
-               (resume) => resume.id === selectedResumeId
-            )}
             onSaveEntry={handleSaveEntry}
          />
          {/* <ResumeView selectedResume={selectedResume} /> */}

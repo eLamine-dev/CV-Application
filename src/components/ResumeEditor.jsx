@@ -4,23 +4,28 @@ import ElementsTabs from './resumeEditor/ElementsTabs';
 import ElementForm from './resumeEditor/ElementForm';
 import { DatePicker } from '@mui/x-date-pickers';
 
-function ResumeEditor({ selectedResumeId, selectedResume, onSaveEntry }) {
+function ResumeEditor({ resumes, selectedResumeId, onSaveEntry }) {
    const [activeTab, setActiveTab] = useState('general info');
    const [formData, setFormData] = useState({});
 
+   const selectedResume = resumes.find(
+      (resume) => resume.id === selectedResumeId
+   );
+
    useEffect(() => {
       resetFormData();
-   }, [selectedResumeId, activeTab]);
+   }, [selectedResumeId, activeTab, resumes]);
 
    const resetFormData = () => {
       setFormData({});
+
       let dateFields = config[activeTab].filter(
          (field) => field.component === DatePicker
       );
       dateFields.forEach((field) => {
          setFormData((prevData) => ({ ...prevData, [field.id]: null }));
       });
-      if (activeTab === 'general info') {
+      if (activeTab === 'general info' && selectedResume['general info'][0]) {
          setFormData((prevData) => ({
             ...prevData,
             ...selectedResume['general info'][0],
@@ -34,6 +39,7 @@ function ResumeEditor({ selectedResumeId, selectedResume, onSaveEntry }) {
 
    const handleSaveDada = (formData) => {
       onSaveEntry(activeTab, formData);
+
       resetFormData();
    };
 
@@ -50,7 +56,6 @@ function ResumeEditor({ selectedResumeId, selectedResume, onSaveEntry }) {
             setFormData={setFormData}
             activeTab={activeTab}
             selectedResume={selectedResume}
-            selectedResumeId={selectedResumeId}
             config={config}
             onSaveData={handleSaveDada}
             resetFormData={resetFormData}
