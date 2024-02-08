@@ -12,3 +12,5 @@ const Experience = ({ experienceData }) => {
       </div>
    );
 };
+
+export default Experience;

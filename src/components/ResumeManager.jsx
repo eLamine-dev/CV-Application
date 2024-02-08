@@ -19,31 +19,26 @@ function ResumeManager({
       }
    };
 
-   const deleteResume = () => {};
+   const deleteResume = (resumeId) => {
+      onDeleteResume(resumeId);
+   };
 
    return (
       <Box className="ResumeManager">
          <h2>Resumes Management</h2>
 
          <Stack>
-            {resumes.map((resume) => (
+            {Object.keys(resumes).map((resumeId) => (
                <Chip
-                  onDelete={deleteResume}
-                  onClick={() => onSelectResume(resume.id)}
-                  key={resume.id}
-                  label={resume.name}
-               >
-                  {/* <Button onClick={() => onSelectResume(resume.id)}>
-                     {resume.name}
-                  </Button>
-                  <Button onClick={() => onDeleteResume(resume.id)}>
-                     Delete
-                  </Button> */}
-               </Chip>
+                  onDelete={() => deleteResume(resumeId)}
+                  onClick={() => onSelectResume(resumeId)}
+                  key={resumeId}
+                  label={resumes[resumeId].name}
+               />
             ))}
          </Stack>
 
-         {resumes.length === 0 && (
+         {Object.keys(resumes).length === 0 && (
             <p>No resumes available. Create a new one!</p>
          )}
          {selectedResume && (

@@ -11,3 +11,5 @@ const Languages = ({ languagesData }) => {
       </div>
    );
 };
+
+export default Languages;

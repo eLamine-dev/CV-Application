@@ -15,3 +15,5 @@ const Education = ({ educationData }) => {
       </div>
    );
 };
+
+export default Education;

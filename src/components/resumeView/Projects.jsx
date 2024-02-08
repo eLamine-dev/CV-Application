@@ -15,3 +15,5 @@ const Projects = ({ projectsData }) => {
       </div>
    );
 };
+
+export default Projects;

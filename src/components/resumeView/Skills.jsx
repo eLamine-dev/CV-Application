@@ -11,3 +11,5 @@ const Skills = ({ skillsData }) => {
       </div>
    );
 };
+
+export default Skills;

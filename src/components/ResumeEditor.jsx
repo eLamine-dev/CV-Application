@@ -2,45 +2,28 @@ import { useState, useEffect } from 'react';
 import config from './resumeEditor/Config';
 import ElementsTabs from './resumeEditor/ElementsTabs';
 import ElementForm from './resumeEditor/ElementForm';
-import { DatePicker } from '@mui/x-date-pickers';
 
-function ResumeEditor({ resumes, selectedResumeId, onSaveEntry }) {
+function ResumeEditor({ selectedResume, setSelectedResume, onSaveEntry }) {
    const [activeTab, setActiveTab] = useState('general info');
-   const [formData, setFormData] = useState({});
-
-   const selectedResume = resumes.find(
-      (resume) => resume.id === selectedResumeId
-   );
-
-   useEffect(() => {
-      resetFormData();
-   }, [selectedResumeId, activeTab, resumes]);
-
-   const resetFormData = () => {
-      setFormData({});
-
-      let dateFields = config[activeTab].filter(
-         (field) => field.component === DatePicker
-      );
-      dateFields.forEach((field) => {
-         setFormData((prevData) => ({ ...prevData, [field.id]: null }));
-      });
-      if (activeTab === 'general info' && selectedResume['general info'][0]) {
-         setFormData((prevData) => ({
-            ...prevData,
-            ...selectedResume['general info'][0],
-         }));
-      }
-   };
 
    const handleTabChange = (tab) => {
       setActiveTab(tab);
    };
 
-   const handleSaveDada = (formData) => {
-      onSaveEntry(activeTab, formData);
-
-      resetFormData();
+   const handleSaveEntry = (category, data) => {
+      const updatedResume = {
+         ...selectedResume,
+         [category]: data.id
+            ? (selectedResume[category] || []).map((entry) =>
+                 entry.id === data.id ? { ...entry, ...data } : entry
+              )
+            : [
+                 ...(selectedResume[category] || []),
+                 { ...data, id: Date.now().toString() },
+              ],
+      };
+      setSelectedResume(updatedResume);
+      onSaveEntry(updatedResume);
    };
 
    return (
@@ -52,22 +35,11 @@ function ResumeEditor({ resumes, selectedResumeId, onSaveEntry }) {
          />
 
          <ElementForm
-            formData={formData}
-            setFormData={setFormData}
             activeTab={activeTab}
             selectedResume={selectedResume}
             config={config}
-            onSaveData={handleSaveDada}
-            resetFormData={resetFormData}
+            onSaveData={handleSaveEntry}
          />
-
-         {/* <div>
-            {config[activeTab].map((field) => (
-               <div key={field.id}></div>
-            ))}
-         </div>
-         {renderFormInputs()}
-         <button onClick={handleSave}>Save</button> */}
       </div>
    );
 }

@@ -7,8 +7,8 @@ import sampleResume from './components/sampleResume';
 import './styles/App.css';
 
 function App() {
-   const [resumes, setResumes] = useState([sampleResume]);
-   const [selectedResumeId, setSelectedResumeId] = useState('id01');
+   const [resumes, setResumes] = useState({ [sampleResume.id]: sampleResume });
+   const [selectedResume, setSelectedResume] = useState(sampleResume);
 
    useEffect(() => {
       console.log(resumes);
@@ -29,32 +29,18 @@ function App() {
    const handleDeleteResume = (resumeId) => {
       const updatedResumes = resumes.filter((resume) => resume.id !== resumeId);
       setResumes(updatedResumes);
-      setSelectedResumeId(null);
+      setSelectedResume(null);
    };
 
    const handleSelectResume = (resumeId) => {
-      setSelectedResumeId(resumeId);
+      setSelectedResume(resumeId);
    };
 
-   const handleSaveEntry = (category, data) => {
-      const updatedResumes = resumes.map((resume) => {
-         if (resume.id === selectedResumeId) {
-            return {
-               ...resume,
-               [category]: data.id
-                  ? (resume[category] || []).map((entry) =>
-                       entry.id === data.id ? { ...entry, ...data } : entry
-                    )
-                  : [
-                       ...(resume[category] || []),
-                       { ...data, id: Date.now().toString() },
-                    ],
-            };
-         }
-         return resume;
-      });
-
-      setResumes(updatedResumes);
+   const handleUpdateResume = (updatedResume) => {
+      setResumes((prevResumes) => ({
+         ...prevResumes,
+         [updatedResume.id]: updatedResume,
+      }));
    };
 
    return (
@@ -62,18 +48,17 @@ function App() {
          {/* <Header /> */}
          <ResumeManager
             resumes={resumes}
-            selectedResumeId={selectedResumeId}
             onNewResume={handleCreateNewResume}
             onSelectResume={handleSelectResume}
             onDeleteResume={handleDeleteResume}
          />
 
          <ResumeEditor
-            resumes={resumes}
-            selectedResumeId={selectedResumeId}
-            onSaveEntry={handleSaveEntry}
+            selectedResume={selectedResume}
+            setSelectedResume={setSelectedResume}
+            onSaveEntry={handleUpdateResume}
          />
-         {/* <ResumeView selectedResume={selectedResume} /> */}
+         <ResumeView selectedResume={selectedResume} />
       </div>
    );
 }

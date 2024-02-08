@@ -16,15 +16,30 @@ import {
 
 import dayjs from 'dayjs';
 
-function ElementForm({
-   formData,
-   setFormData,
-   activeTab,
-   selectedResume,
+function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
+   const [formData, setFormData] = useState({});
 
-   config,
-   onSaveData,
-}) {
+   useEffect(() => {
+      resetFormData();
+   }, [selectedResume, activeTab]);
+
+   const resetFormData = () => {
+      setFormData({});
+
+      let dateFields = config[activeTab].filter(
+         (field) => field.component === DateField
+      );
+      dateFields.forEach((field) => {
+         setFormData((prevData) => ({ ...prevData, [field.id]: null }));
+      });
+      if (activeTab === 'general info' && selectedResume['general info'][0]) {
+         setFormData((prevData) => ({
+            ...prevData,
+            ...selectedResume['general info'][0],
+         }));
+      }
+   };
+
    const handleInputChange = (fieldId, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldId]: value }));
    };
