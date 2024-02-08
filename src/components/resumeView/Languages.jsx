@@ -1,15 +1,19 @@
-const Languages = ({ languagesData }) => {
+function Languages({ languagesData }) {
    return (
       <div>
          <h2>Languages</h2>
-         {languagesData.map((language) => (
-            <div key={language.id}>
-               <p>Language: {language.language}</p>
-               <p>Proficiency: {language.proficiency}</p>
-            </div>
-         ))}
+         {languagesData && languagesData.length > 0 ? (
+            languagesData.map((language, index) => (
+               <div key={index}>
+                  <p>Language: {language.language}</p>
+                  <p>Proficiency: {language.proficiency}</p>
+               </div>
+            ))
+         ) : (
+            <p>No languages information available.</p>
+         )}
       </div>
    );
-};
+}
 
 export default Languages;
