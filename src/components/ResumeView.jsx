@@ -6,13 +6,9 @@
 // import Languages from './resumeView/Languages';
 
 function ResumeView({ selectedResume }) {
-   if (!selectedResume) {
-      return <div>Select a resume to view</div>;
-   }
-
    return (
       <div>
-         <GeneralInfo generalInfo={selectedResume.generalInfo} />
+         <GeneralInfo generalInfo={selectedResume['general info']} />
          <Education educationData={selectedResume.education || []} />
          <Experience experienceData={selectedResume.experience || []} />
          <Projects projectsData={selectedResume.projects || []} />
