@@ -16,13 +16,14 @@ function App() {
 
    const handleCreateNewResume = (newResumeName) => {
       if (newResumeName.trim() !== '') {
+         const newResumeId = Date.now().toString();
          const newResume = {
             name: newResumeName,
-            id: Date.now().toString(),
+            id: newResumeId,
             'general info': [],
          };
 
-         setResumes([...resumes, newResume]);
+         setResumes({ ...resumes, [newResumeId]: newResume });
       }
    };
 
@@ -33,7 +34,7 @@ function App() {
    };
 
    const handleSelectResume = (resumeId) => {
-      setSelectedResume(resumeId);
+      setSelectedResume(resumes[resumeId]);
    };
 
    const handleUpdateResume = (updatedResume) => {

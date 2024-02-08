@@ -32,7 +32,11 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
       dateFields.forEach((field) => {
          setFormData((prevData) => ({ ...prevData, [field.id]: null }));
       });
-      if (activeTab === 'general info' && selectedResume['general info'][0]) {
+      if (
+         activeTab === 'general info' &&
+         selectedResume['general info'] &&
+         selectedResume['general info'][0]
+      ) {
          setFormData((prevData) => ({
             ...prevData,
             ...selectedResume['general info'][0],
