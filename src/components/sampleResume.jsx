@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 const sampleResume = {
    id: 'id01',
    name: 'Sample resume',
@@ -18,7 +20,9 @@ const sampleResume = {
          label: 'education',
          degree: 'Bch Sc. Computer science',
          school: 'University of Example',
-         graduationYear: new Date('2011-11-11'),
+         location: 'Example ville, USA',
+         startDate: dayjs('2011-11-11'),
+         endDate: dayjs('2015-05-05'),
       },
    ],
    experience: [
@@ -27,7 +31,10 @@ const sampleResume = {
          label: 'experience',
          position: 'Software Developer',
          company: 'Tech Solutions Inc.',
+         location: 'Example ville, USA',
          workDescription: 'Developed web applications using React and Node.js.',
+         startDate: dayjs('2011-11-11'),
+         endDate: dayjs('2015-05-05'),
       },
    ],
    projects: [
@@ -37,6 +44,8 @@ const sampleResume = {
          projectName: 'Portfolio Website',
          description: 'Designed and developed a personal portfolio website.',
          projectLink: 'https://example.com/portfolio',
+         startDate: dayjs('2011-11-11'),
+         endDate: dayjs('2015-05-05'),
       },
    ],
    skills: [
@@ -44,7 +53,6 @@ const sampleResume = {
          id: 'sl01',
          label: 'skills',
          skillName: 'JavaScript',
-         proficiency: 'Intermediate',
       },
    ],
    languages: [

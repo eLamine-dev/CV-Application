@@ -1,18 +1,31 @@
+import dayjs from 'dayjs';
+
 function Projects({ projectsData }) {
    return (
       <div>
          <h2>Projects</h2>
-         {projectsData && projectsData.length > 0 ? (
+         {projectsData &&
+            projectsData.length > 0 &&
             projectsData.map((project, index) => (
                <div key={index}>
-                  <p>Project Name: {project.projectName}</p>
-                  <p>Description: {project.description}</p>
-                  <p>Project Link: {project.projectLink}</p>
+                  {project.projectName && (
+                     <p>Project Name: {project.projectName}</p>
+                  )}
+                  {project.description && (
+                     <p>Description: {project.description}</p>
+                  )}
+                  {project.projectLink && (
+                     <p>Project Link: {project.projectLink}</p>
+                  )}
+                  {project.startDate && project.endDate && (
+                     <p>
+                        Duration:{' '}
+                        {dayjs(project.startDate).format('DD/MM/YYYY')} -{' '}
+                        {dayjs(project.endDate).format('DD/MM/YYYY')}
+                     </p>
+                  )}
                </div>
-            ))
-         ) : (
-            <p>No projects information available.</p>
-         )}
+            ))}
       </div>
    );
 }

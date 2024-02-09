@@ -16,11 +16,12 @@ import {
 
 import dayjs from 'dayjs';
 
-function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
+function DynamicForm({ activeTab, selectedResume, config, onSaveData }) {
    const [formData, setFormData] = useState({});
 
    useEffect(() => {
       resetFormData();
+      console.log(selectedResume);
    }, [selectedResume, activeTab]);
 
    const resetFormData = () => {
@@ -59,7 +60,7 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
    };
 
    return (
-      <div className="ElementForm">
+      <div className="DynamicForm">
          {activeTab !== 'general info' && selectedResume[activeTab] && (
             <Stack>
                {selectedResume[activeTab].map((entry, index) => {
@@ -143,4 +144,4 @@ function ElementForm({ activeTab, selectedResume, config, onSaveData }) {
    );
 }
 
-export default ElementForm;
+export default DynamicForm;

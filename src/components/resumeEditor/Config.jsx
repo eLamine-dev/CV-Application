@@ -21,19 +21,46 @@ const config = {
       { id: 'degree', component: TextField, type: 'text', label: 'Degree' },
       { id: 'school', component: TextField, type: 'text', label: 'School' },
       {
-         id: 'graduationYear',
+         id: 'location',
+         component: TextField,
+         type: 'text',
+         label: 'Location',
+      },
+      {
+         id: 'startDate',
          component: DateField,
-         label: 'Graduation Year',
+         label: 'Start Date',
+      },
+      {
+         id: 'endDate',
+         component: DateField,
+         label: 'End Date',
       },
    ],
    experience: [
       { id: 'position', component: TextField, type: 'text', label: 'Position' },
       { id: 'company', component: TextField, type: 'text', label: 'Company' },
       {
+         id: 'location',
+         component: TextField,
+         type: 'text',
+         label: 'Location',
+      },
+      {
          id: 'workDescription',
          component: TextField,
          label: 'Work Description',
          multiline: true,
+      },
+      {
+         id: 'startDate',
+         component: DateField,
+         label: 'Start Date',
+      },
+      {
+         id: 'endDate',
+         component: DateField,
+         label: 'End Date',
       },
    ],
    projects: [
@@ -54,6 +81,16 @@ const config = {
          component: TextField,
          type: 'text',
          label: 'Project Link',
+      },
+      {
+         id: 'startDate',
+         component: DateField,
+         label: 'Start Date',
+      },
+      {
+         id: 'endDate',
+         component: DateField,
+         label: 'End Date',
       },
    ],
    skills: [
