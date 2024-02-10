@@ -16,14 +16,13 @@ function App() {
 
    const handleCreateNewResume = (newResumeName) => {
       if (newResumeName.trim() !== '') {
-         const newResumeId = Date.now().toString();
          const newResume = {
+            id: Date.now().toString(),
             name: newResumeName,
-            id: newResumeId,
             'general info': [],
          };
 
-         setResumes({ ...resumes, [newResumeId]: newResume });
+         setResumes({ ...resumes, [newResume.id]: newResume });
       }
    };
 

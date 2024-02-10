@@ -6,7 +6,6 @@ const sampleResume = {
    'general info': [
       {
          id: 'gi01',
-         label: 'general info',
          fullName: 'John Doe',
          jobTitle: 'Software Developer',
          email: 'john.doe@example.com',
@@ -17,7 +16,6 @@ const sampleResume = {
    education: [
       {
          id: 'ed01',
-         label: 'education',
          degree: 'Bch Sc. Computer science',
          school: 'University of Example',
          location: 'Example ville, USA',
@@ -28,7 +26,6 @@ const sampleResume = {
    experience: [
       {
          id: 'ex01',
-         label: 'experience',
          position: 'Software Developer',
          company: 'Tech Solutions Inc.',
          location: 'Example ville, USA',
@@ -40,7 +37,6 @@ const sampleResume = {
    projects: [
       {
          id: 'pr01',
-         label: 'projects',
          projectName: 'Portfolio Website',
          description: 'Designed and developed a personal portfolio website.',
          projectLink: 'https://example.com/portfolio',
@@ -51,14 +47,12 @@ const sampleResume = {
    skills: [
       {
          id: 'sl01',
-         label: 'skills',
          skillName: 'JavaScript',
       },
    ],
    languages: [
       {
          id: 'lg01',
-         label: 'languages',
          language: 'English',
          proficiency: 'Fluent',
       },

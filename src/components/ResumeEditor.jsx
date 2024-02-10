@@ -17,12 +17,12 @@ function ResumeEditor({ selectedResume, setSelectedResume, onSaveEntry }) {
             ? selectedResume[activeTab].map((entry) =>
                  entry.id === data.id ? { ...entry, ...data } : entry
               )
-            : selectedResume[activeTab]?.length > 0
+            : selectedResume[activeTab].length > 0
             ? [
                  ...selectedResume[activeTab],
-                 { ...data, id: Date.now().toString() },
+                 { id: Date.now().toString(), ...data },
               ]
-            : [{ ...data, id: Date.now().toString() }],
+            : [{ id: Date.now().toString(), ...data }],
       };
 
       setSelectedResume(updatedResume);

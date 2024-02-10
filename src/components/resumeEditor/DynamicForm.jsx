@@ -21,18 +21,22 @@ function DynamicForm({ activeTab, selectedResume, config, onSaveData }) {
 
    useEffect(() => {
       resetFormData();
-      console.log(selectedResume);
+      console.log(formData);
    }, [selectedResume, activeTab]);
 
    const resetFormData = () => {
-      setFormData({});
-
-      let dateFields = config[activeTab].filter(
-         (field) => field.component === DateField
-      );
-      dateFields.forEach((field) => {
-         setFormData((prevData) => ({ ...prevData, [field.id]: null }));
+      const newFormData = {};
+      config[activeTab].forEach((field) => {
+         newFormData[field.id] = null;
       });
+      setFormData(newFormData);
+
+      // let dateFields = config[activeTab].filter(
+      //    (field) => field.component === DateField
+      // );
+      // dateFields.forEach((field) => {
+      //    setFormData((prevData) => ({ ...prevData, [field.id]: null }));
+      // });
       if (
          activeTab === 'general info' &&
          selectedResume['general info'] &&
@@ -66,9 +70,18 @@ function DynamicForm({ activeTab, selectedResume, config, onSaveData }) {
                {selectedResume[activeTab].map((entry, index) => {
                   return (
                      <Chip
-                        variant="outlined"
+                        variant={
+                           entry.id === formData.id ? 'filled' : 'outlined'
+                        }
                         onClick={() => {
                            setFormData(entry);
+                        }}
+                        sx={{
+                           maxWidth: 220,
+                           justifyContent: 'space-between',
+                           // '& > .MuiChip-label': {
+                           //    textAlign: 'left',
+                           // },
                         }}
                         onDelete={deleteEntry}
                         key={index}
