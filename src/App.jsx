@@ -26,12 +26,6 @@ function App() {
       }
    };
 
-   const handleDeleteResume = (resumeId) => {
-      const updatedResumes = resumes.filter((resume) => resume.id !== resumeId);
-      setResumes(updatedResumes);
-      setSelectedResume(null);
-   };
-
    const handleSelectResume = (resumeId) => {
       setSelectedResume(resumes[resumeId]);
    };
@@ -41,6 +35,18 @@ function App() {
          ...prevResumes,
          [updatedResume.id]: updatedResume,
       }));
+   };
+
+   const handleDeleteResume = (resumeId) => {
+      const updatedResumes = { ...resumes };
+
+      delete updatedResumes[resumeId];
+
+      if (selectedResume && selectedResume.id === resumeId) {
+         setSelectedResume(null);
+      }
+
+      setResumes(updatedResumes);
    };
 
    return (

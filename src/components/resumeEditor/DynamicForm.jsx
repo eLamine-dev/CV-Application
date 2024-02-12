@@ -16,7 +16,13 @@ import {
 
 import dayjs from 'dayjs';
 
-function DynamicForm({ activeTab, selectedResume, config, onSaveData }) {
+function DynamicForm({
+   activeTab,
+   selectedResume,
+   config,
+   onSaveEntry,
+   onDeleteEntry,
+}) {
    const [formData, setFormData] = useState({});
 
    useEffect(() => {
@@ -37,6 +43,7 @@ function DynamicForm({ activeTab, selectedResume, config, onSaveData }) {
       // dateFields.forEach((field) => {
       //    setFormData((prevData) => ({ ...prevData, [field.id]: null }));
       // });
+
       if (
          activeTab === 'general info' &&
          selectedResume['general info'] &&
@@ -56,11 +63,14 @@ function DynamicForm({ activeTab, selectedResume, config, onSaveData }) {
    const handleSubmit = (e) => {
       e.preventDefault();
 
-      onSaveData(formData);
+      onSaveEntry(formData);
    };
 
-   const deleteEntry = (e) => {
-      e.preventDefault();
+   const deleteEntry = (entryId) => {
+      onDeleteEntry(entryId);
+      if (formData.id === entryId) {
+         resetFormData();
+      }
    };
 
    return (
@@ -83,7 +93,9 @@ function DynamicForm({ activeTab, selectedResume, config, onSaveData }) {
                            //    textAlign: 'left',
                            // },
                         }}
-                        onDelete={deleteEntry}
+                        onDelete={() => {
+                           deleteEntry(entry.id);
+                        }}
                         key={index}
                         label={`${Object.values(entry)[1]} - ${
                            Object.values(entry)[2]

@@ -29,6 +29,18 @@ function ResumeEditor({ selectedResume, setSelectedResume, onSaveEntry }) {
       onSaveEntry(updatedResume);
    };
 
+   const handleDeleteEntry = (id) => {
+      const updatedResume = {
+         ...selectedResume,
+         [activeTab]: selectedResume[activeTab].filter(
+            (entry) => entry.id !== id
+         ),
+      };
+
+      setSelectedResume(updatedResume);
+      onSaveEntry(updatedResume);
+   };
+
    return (
       <div className="ResumeEditor">
          <NavigationTabs
@@ -41,7 +53,8 @@ function ResumeEditor({ selectedResume, setSelectedResume, onSaveEntry }) {
             activeTab={activeTab}
             selectedResume={selectedResume}
             config={config}
-            onSaveData={handleSaveEntry}
+            onSaveEntry={handleSaveEntry}
+            onDeleteEntry={handleDeleteEntry}
          />
       </div>
    );
