@@ -4,16 +4,18 @@ import Experience from './resumeView/Experience';
 import Projects from './resumeView/Projects';
 import Skills from './resumeView/Skills.jsx';
 import Languages from './resumeView/Languages';
+import sampleResume from './sampleResume.jsx';
 
 function ResumeView({ selectedResume }) {
+   const resume = selectedResume || sampleResume;
    return (
       <div>
-         <GeneralInfo generalInfo={selectedResume['general info']} />
-         <Education educationData={selectedResume.education || []} />
-         <Experience experienceData={selectedResume.experience || []} />
-         <Projects projectsData={selectedResume.projects || []} />
-         <Skills skillsData={selectedResume.skills || []} />
-         <Languages languagesData={selectedResume.languages || []} />
+         <GeneralInfo generalInfo={resume['general info']} />
+         <Education educationData={resume.education || []} />
+         <Experience experienceData={resume.experience || []} />
+         <Projects projectsData={resume.projects || []} />
+         <Skills skillsData={resume.skills || []} />
+         <Languages languagesData={resume.languages || []} />
       </div>
    );
 }

@@ -64,6 +64,7 @@ function DynamicForm({
       e.preventDefault();
 
       onSaveEntry(formData);
+      resetFormData();
    };
 
    const deleteEntry = (entryId) => {

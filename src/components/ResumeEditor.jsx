@@ -17,7 +17,7 @@ function ResumeEditor({ selectedResume, setSelectedResume, onSaveEntry }) {
             ? selectedResume[activeTab].map((entry) =>
                  entry.id === data.id ? { ...entry, ...data } : entry
               )
-            : selectedResume[activeTab].length > 0
+            : (selectedResume[activeTab] ?? []).length > 0
             ? [
                  ...selectedResume[activeTab],
                  { id: Date.now().toString(), ...data },
@@ -49,13 +49,15 @@ function ResumeEditor({ selectedResume, setSelectedResume, onSaveEntry }) {
             activeTab={activeTab}
          />
 
-         <DynamicForm
-            activeTab={activeTab}
-            selectedResume={selectedResume}
-            config={config}
-            onSaveEntry={handleSaveEntry}
-            onDeleteEntry={handleDeleteEntry}
-         />
+         {selectedResume && (
+            <DynamicForm
+               activeTab={activeTab}
+               selectedResume={selectedResume}
+               config={config}
+               onSaveEntry={handleSaveEntry}
+               onDeleteEntry={handleDeleteEntry}
+            />
+         )}
       </div>
    );
 }

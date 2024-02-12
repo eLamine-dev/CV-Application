@@ -30,6 +30,16 @@ function ResumeManager({
          <Stack>
             {Object.keys(resumes).map((resumeId) => (
                <Chip
+                  variant={
+                     resumeId === selectedResume.id ? 'filled' : 'outlined'
+                  }
+                  sx={{
+                     maxWidth: 220,
+                     justifyContent: 'space-between',
+                     // '& > .MuiChip-label': {
+                     //    textAlign: 'left',
+                     // },
+                  }}
                   onDelete={() => deleteResume(resumeId)}
                   onClick={() => onSelectResume(resumeId)}
                   key={resumeId}

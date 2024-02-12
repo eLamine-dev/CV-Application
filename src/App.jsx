@@ -23,6 +23,7 @@ function App() {
          };
 
          setResumes({ ...resumes, [newResume.id]: newResume });
+         setSelectedResume(newResume);
       }
    };
 
@@ -54,6 +55,7 @@ function App() {
          {/* <Header /> */}
          <ResumeManager
             resumes={resumes}
+            selectedResume={selectedResume}
             onNewResume={handleCreateNewResume}
             onSelectResume={handleSelectResume}
             onDeleteResume={handleDeleteResume}
