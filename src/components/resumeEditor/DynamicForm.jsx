@@ -27,7 +27,6 @@ function DynamicForm({
 
    useEffect(() => {
       resetFormData();
-      console.log(formData);
    }, [selectedResume, activeTab]);
 
    const resetFormData = () => {
@@ -36,13 +35,6 @@ function DynamicForm({
          newFormData[field.id] = null;
       });
       setFormData(newFormData);
-
-      // let dateFields = config[activeTab].filter(
-      //    (field) => field.component === DateField
-      // );
-      // dateFields.forEach((field) => {
-      //    setFormData((prevData) => ({ ...prevData, [field.id]: null }));
-      // });
 
       if (
          activeTab === 'general info' &&
@@ -62,7 +54,6 @@ function DynamicForm({
 
    const handleSubmit = (e) => {
       e.preventDefault();
-
       onSaveEntry(formData);
       resetFormData();
    };

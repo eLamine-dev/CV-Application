@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Stack, Button, Chip, Box } from '@mui/material';
+import { Stack, Button, Chip, Box, TextField } from '@mui/material';
 
 function ResumeManager({
    resumes,
@@ -25,8 +25,6 @@ function ResumeManager({
 
    return (
       <Box className="ResumeManager">
-         <h2>Resumes Management</h2>
-
          <Stack>
             {Object.keys(resumes).map((resumeId) => (
                <Chip
@@ -51,32 +49,49 @@ function ResumeManager({
          {Object.keys(resumes).length === 0 && (
             <p>No resumes available. Create a new one!</p>
          )}
-         {selectedResume && (
+         {/* {selectedResume && (
             <p>
                Currently editing: <strong>{selectedResume.name}</strong>
             </p>
-         )}
+         )} */}
 
          {isCreatingNewResume ? (
             <div>
-               <label htmlFor="newResumeName">Enter new resume name:</label>
-               <input
+               <TextField
+                  placeholder="New Resume"
+                  label="Resume name"
+                  size="small"
                   type="text"
                   id="newResumeName"
                   value={newResumeName}
                   onChange={(e) => setNewResumeName(e.target.value)}
                />
-               <button onClick={handleCreateNewResume}>
-                  Create new resume
-               </button>
+               <Button
+                  variant="contained"
+                  size="small"
+                  onClick={handleCreateNewResume}
+               >
+                  Save
+               </Button>
+               <Button
+                  variant="contained"
+                  size="small"
+                  onClick={() => setIsCreatingNewResume(false)}
+               >
+                  Close
+               </Button>
             </div>
          ) : (
-            <button onClick={() => setIsCreatingNewResume(true)}>
-               Create New Resume
-            </button>
+            <div>
+               <Button
+                  variant="contained"
+                  size="small"
+                  onClick={() => setIsCreatingNewResume(true)}
+               >
+                  New Resume
+               </Button>
+            </div>
          )}
-
-         <button>Close</button>
       </Box>
    );
 }

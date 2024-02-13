@@ -51,7 +51,7 @@ function App() {
    };
 
    return (
-      <div>
+      <div className="App">
          {/* <Header /> */}
          <ResumeManager
             resumes={resumes}

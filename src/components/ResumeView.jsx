@@ -9,7 +9,7 @@ import sampleResume from './sampleResume.jsx';
 function ResumeView({ selectedResume }) {
    const resume = selectedResume || sampleResume;
    return (
-      <div>
+      <div className="ResumeView">
          <GeneralInfo generalInfo={resume['general info']} />
          <Education educationData={resume.education || []} />
          <Experience experienceData={resume.experience || []} />
