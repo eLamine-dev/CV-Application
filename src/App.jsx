@@ -8,7 +8,7 @@ import './styles/App.css';
 
 function App() {
    const [resumes, setResumes] = useState({ [sampleResume.id]: sampleResume });
-   const [selectedResume, setSelectedResume] = useState(sampleResume);
+   const [selectedResume, setSelectedResume] = useState({});
 
    useEffect(() => {
       console.log(resumes);
@@ -53,20 +53,25 @@ function App() {
    return (
       <div className="App">
          {/* <Header /> */}
-         <ResumeManager
-            resumes={resumes}
-            selectedResume={selectedResume}
-            onNewResume={handleCreateNewResume}
-            onSelectResume={handleSelectResume}
-            onDeleteResume={handleDeleteResume}
-         />
+         {selectedResume ? (
+            <>
+               <ResumeEditor
+                  selectedResume={selectedResume}
+                  setSelectedResume={setSelectedResume}
+                  onSaveEntry={handleUpdateResume}
+               />
 
-         <ResumeEditor
-            selectedResume={selectedResume}
-            setSelectedResume={setSelectedResume}
-            onSaveEntry={handleUpdateResume}
-         />
-         <ResumeView selectedResume={selectedResume} />
+               <ResumeView selectedResume={selectedResume} />
+            </>
+         ) : (
+            <ResumeManager
+               resumes={resumes}
+               selectedResume={selectedResume}
+               onNewResume={handleCreateNewResume}
+               onSelectResume={handleSelectResume}
+               onDeleteResume={handleDeleteResume}
+            />
+         )}
       </div>
    );
 }
