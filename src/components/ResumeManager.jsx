@@ -1,12 +1,21 @@
 import { useState } from 'react';
-import { Stack, Button, Chip, Box, TextField } from '@mui/material';
+import {
+   Box,
+   Button,
+   Card,
+   CardActions,
+   CardContent,
+   Stack,
+   TextField,
+} from '@mui/material';
 
 function ResumeManager({
    resumes,
-   selectedResume,
    onNewResume,
-   onSelectResume,
+   onOpenInEditor,
    onDeleteResume,
+   onMakeCopy,
+   // onDownloadPdf,
 }) {
    const [newResumeName, setNewResumeName] = useState('');
    const [isCreatingNewResume, setIsCreatingNewResume] = useState(false);
@@ -19,70 +28,33 @@ function ResumeManager({
       }
    };
 
-   const deleteResume = (resumeId) => {
-      onDeleteResume(resumeId);
+   const handleMakeCopy = (resumeId) => {
+      const originalResume = resumes[resumeId];
+      const copiedResume = {
+         ...originalResume,
+         id: Date.now().toString(),
+         name: `${originalResume.name}-copy`,
+      };
+
+      onMakeCopy(copiedResume);
    };
 
    return (
       <Box className="ResumeManager">
-         <Stack>
-            {Object.keys(resumes).map((resumeId) => (
-               <Chip
-                  variant={
-                     resumeId === selectedResume.id ? 'filled' : 'outlined'
-                  }
-                  sx={{
-                     maxWidth: 220,
-                     justifyContent: 'space-between',
-                     // '& > .MuiChip-label': {
-                     //    textAlign: 'left',
-                     // },
-                  }}
-                  onDelete={() => deleteResume(resumeId)}
-                  onClick={() => onSelectResume(resumeId)}
-                  key={resumeId}
-                  label={resumes[resumeId].name}
-               />
-            ))}
-         </Stack>
-
-         {Object.keys(resumes).length === 0 && (
-            <p>No resumes available. Create a new one!</p>
-         )}
-         {/* {selectedResume && (
-            <p>
-               Currently editing: <strong>{selectedResume.name}</strong>
-            </p>
-         )} */}
-
-         {isCreatingNewResume ? (
-            <div>
-               <TextField
-                  placeholder="New Resume"
-                  label="Resume name"
-                  size="small"
-                  type="text"
-                  id="newResumeName"
-                  value={newResumeName}
-                  onChange={(e) => setNewResumeName(e.target.value)}
-               />
-               <Button
-                  variant="contained"
-                  size="small"
-                  onClick={handleCreateNewResume}
-               >
-                  Save
-               </Button>
-               <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => setIsCreatingNewResume(false)}
-               >
-                  Close
-               </Button>
-            </div>
-         ) : (
-            <div>
+         {/* Welcome message and new resume creation section */}
+         <Box
+            sx={{
+               display: 'flex',
+               alignItems: 'center',
+               justifyContent: 'space-between',
+               mb: 2,
+            }}
+         >
+            <Box>
+               <h2>Resumes</h2>
+               <p>Create, edit and manage your resumes.</p>
+            </Box>
+            {!isCreatingNewResume ? (
                <Button
                   variant="contained"
                   size="small"
@@ -90,8 +62,66 @@ function ResumeManager({
                >
                   New Resume
                </Button>
-            </div>
-         )}
+            ) : (
+               <Stack direction="row" spacing={2}>
+                  <TextField
+                     placeholder="New Resume"
+                     label="Resume name"
+                     size="small"
+                     type="text"
+                     id="newResumeName"
+                     value={newResumeName}
+                     onChange={(e) => setNewResumeName(e.target.value)}
+                  />
+                  <Button
+                     variant="contained"
+                     size="small"
+                     onClick={handleCreateNewResume}
+                  >
+                     Save
+                  </Button>
+                  <Button
+                     variant="contained"
+                     size="small"
+                     onClick={() => setIsCreatingNewResume(false)}
+                  >
+                     Close
+                  </Button>
+               </Stack>
+            )}
+         </Box>
+
+         {/* List of saved resumes */}
+         <Stack spacing={2}>
+            {Object.keys(resumes).map((resumeId) => (
+               <Card key={resumeId} sx={{ maxWidth: 300 }}>
+                  <CardContent>
+                     <h3>{resumes[resumeId].name}</h3>
+                     {/* Add preview image of the resume here */}
+                  </CardContent>
+                  <CardActions>
+                     <Button
+                        size="small"
+                        onClick={() => onOpenInEditor(resumeId)}
+                     >
+                        Open in Editor
+                     </Button>
+                     <Button
+                        size="small"
+                        onClick={() => handleMakeCopy(resumeId)}
+                     >
+                        Make a Copy
+                     </Button>
+                     <Button
+                        size="small"
+                        onClick={() => onDeleteResume(resumeId)}
+                     >
+                        Delete
+                     </Button>
+                  </CardActions>
+               </Card>
+            ))}
+         </Stack>
       </Box>
    );
 }

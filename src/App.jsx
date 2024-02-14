@@ -8,7 +8,7 @@ import './styles/App.css';
 
 function App() {
    const [resumes, setResumes] = useState({ [sampleResume.id]: sampleResume });
-   const [selectedResume, setSelectedResume] = useState({});
+   const [selectedResume, setSelectedResume] = useState(null);
 
    useEffect(() => {
       console.log(resumes);
@@ -23,11 +23,11 @@ function App() {
          };
 
          setResumes({ ...resumes, [newResume.id]: newResume });
-         setSelectedResume(newResume);
+         // setSelectedResume(newResume);
       }
    };
 
-   const handleSelectResume = (resumeId) => {
+   const handleOpenResume = (resumeId) => {
       setSelectedResume(resumes[resumeId]);
    };
 
@@ -36,6 +36,11 @@ function App() {
          ...prevResumes,
          [updatedResume.id]: updatedResume,
       }));
+   };
+
+   const handleMakeCopy = (copiedResume) => {
+      const updatedResumes = { ...resumes, [copiedResume.id]: copiedResume };
+      setResumes(updatedResumes);
    };
 
    const handleDeleteResume = (resumeId) => {
@@ -66,10 +71,10 @@ function App() {
          ) : (
             <ResumeManager
                resumes={resumes}
-               selectedResume={selectedResume}
                onNewResume={handleCreateNewResume}
-               onSelectResume={handleSelectResume}
+               onOpenInEditor={handleOpenResume}
                onDeleteResume={handleDeleteResume}
+               onMakeCopy={handleMakeCopy}
             />
          )}
       </div>
