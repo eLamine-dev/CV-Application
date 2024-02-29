@@ -12,11 +12,10 @@ function ResumeCard({ resume, onOpenEditor, onMakeCopy, onDownloadPDF }) {
    const handleDownloadPDF = () => {};
 
    return (
-      <Card>
+      <Card className="resumeCard">
          <CardContent>
             {/* Display snapshot of resume */}
             <div>{/* Add snapshot here */}</div>
-            {/* Buttons */}
             <Button onClick={handleOpenEditor}>Open in Editor</Button>
             <Button onClick={handleMakeCopy}>Make a Copy</Button>
             <Button onClick={handleDownloadPDF}>Download PDF</Button>

@@ -1,9 +1,14 @@
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-function ElementsTabs({ config, setActiveTab, activeTab }) {
+function FormNav({ config, setActiveTab, activeTab }) {
    return (
-      <Tabs orientation="vertical" variant="scrollable" value={activeTab}>
+      <Tabs
+         className="formNav"
+         orientation="vertical"
+         variant="scrollable"
+         value={activeTab}
+      >
          {Object.keys(config).map((key, index) => {
             return (
                <Tab
@@ -20,4 +25,4 @@ function ElementsTabs({ config, setActiveTab, activeTab }) {
    );
 }
 
-export default ElementsTabs;
+export default FormNav;

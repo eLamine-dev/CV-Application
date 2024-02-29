@@ -4,7 +4,6 @@ import ResumeManager from './components/ResumeManager';
 import ResumeEditor from './components/ResumeEditor';
 import ResumeView from './components/ResumeView';
 import sampleResume from './components/sampleResume';
-import './styles/App.css';
 
 function App() {
    const [resumes, setResumes] = useState({ [sampleResume.id]: sampleResume });
@@ -55,9 +54,10 @@ function App() {
       setResumes(updatedResumes);
    };
 
+   const handleDownloadPdf = (resumeId) => {};
+
    return (
       <div className="App">
-         {/* <Header /> */}
          {selectedResume ? (
             <>
                <ResumeEditor
@@ -75,6 +75,7 @@ function App() {
                onOpenInEditor={handleOpenResume}
                onDeleteResume={handleDeleteResume}
                onMakeCopy={handleMakeCopy}
+               onDownloadPdf={handleDownloadPdf}
             />
          )}
       </div>

@@ -8,6 +8,7 @@ import sampleResume from './sampleResume.jsx';
 
 function ResumeView({ selectedResume }) {
    const resume = selectedResume || sampleResume;
+
    return (
       <div className="ResumeView">
          <GeneralInfo generalInfo={resume['general info']} />

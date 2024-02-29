@@ -3,6 +3,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
 
+import dayjs from 'dayjs';
+
 import {
    TextField,
    Select,
@@ -12,9 +14,8 @@ import {
    Stack,
    Button,
    Chip,
+   Box,
 } from '@mui/material';
-
-import dayjs from 'dayjs';
 
 function DynamicForm({
    activeTab,
@@ -66,9 +67,10 @@ function DynamicForm({
    };
 
    return (
-      <div className="DynamicForm">
+      <Box className="dynamicForm">
          {activeTab !== 'general info' && selectedResume[activeTab] && (
             <Stack>
+               <h3>Edit Existing:</h3>
                {selectedResume[activeTab].map((entry, index) => {
                   return (
                      <Chip
@@ -97,7 +99,11 @@ function DynamicForm({
                })}
             </Stack>
          )}
-         <form id="editing-form" onSubmit={handleSubmit}>
+         <form
+            id="editing-form"
+            className="inputsContainer"
+            onSubmit={handleSubmit}
+         >
             {config[activeTab].map((field, index) => {
                return (
                   <div key={index}>
@@ -157,7 +163,7 @@ function DynamicForm({
             })}
             <button type="submit">Save</button>
          </form>
-      </div>
+      </Box>
    );
 }
 
