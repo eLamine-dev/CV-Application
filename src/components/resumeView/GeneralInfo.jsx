@@ -1,19 +1,82 @@
-function GeneralInfo({ generalInfo }) {
-   const info = generalInfo[0]; // Assuming there's only one entry for general info
+import { Text, View, Link } from '@react-pdf/renderer';
+
+const GeneralInfo = ({ generalInfo }) => {
+   const info = generalInfo[0];
+
+   const styles = {
+      container: {
+         flexDirection: 'row',
+         borderBottomWidth: 2,
+         borderBottomColor: '#112131',
+         borderBottomStyle: 'solid',
+         alignItems: 'stretch',
+      },
+      detailColumn: {
+         flexDirection: 'column',
+         flexGrow: 9,
+         textTransform: 'uppercase',
+      },
+      linkColumn: {
+         flexDirection: 'column',
+         flexGrow: 2,
+         alignSelf: 'flex-end',
+         justifySelf: 'flex-end',
+      },
+      name: {
+         fontSize: 24,
+         fontFamily: 'Lato Bold',
+      },
+      subtitle: {
+         fontSize: 10,
+         justifySelf: 'flex-end',
+         fontFamily: 'Lato',
+      },
+      link: {
+         fontFamily: 'Lato',
+         fontSize: 10,
+         color: 'black',
+         textDecoration: 'none',
+         alignSelf: 'flex-end',
+         justifySelf: 'flex-end',
+      },
+   };
+
    return (
-      <div>
-         <h2>General Information</h2>
-         {info && (
-            <div>
-               {info.fullName && <p>Name: {info.fullName}</p>}
-               {info.jobTitle && <p>Job Title: {info.jobTitle}</p>}
-               {info.email && <p>Email: {info.email}</p>}
-               {info.phone && <p>Phone: {info.phone}</p>}
-               {info.address && <p>Address: {info.address}</p>}
-            </div>
-         )}
-      </div>
+      <View style={styles.container}>
+         <View style={styles.detailColumn}>
+            {info && (
+               <>
+                  {info.fullName && (
+                     <Text style={styles.name}>Name: {info.fullName}</Text>
+                  )}
+                  {info.jobTitle && (
+                     <Text style={styles.subtitle}>
+                        Job Title: {info.jobTitle}
+                     </Text>
+                  )}
+                  {info.email && (
+                     <Text style={styles.subtitle}>Email: {info.email}</Text>
+                  )}
+                  {info.phone && (
+                     <Text style={styles.subtitle}>Phone: {info.phone}</Text>
+                  )}
+                  {info.address && (
+                     <Text style={styles.subtitle}>
+                        Address: {info.address}
+                     </Text>
+                  )}
+               </>
+            )}
+         </View>
+         <View style={styles.linkColumn}>
+            {info && info.email && (
+               <Link href={`mailto:${info.email}`} style={styles.link}>
+                  {info.email}
+               </Link>
+            )}
+         </View>
+      </View>
    );
-}
+};
 
 export default GeneralInfo;

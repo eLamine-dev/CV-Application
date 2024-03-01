@@ -50,12 +50,12 @@
    gap: 1rem;
 }
 
-.ResumeView {
+/* .ResumeView {
    display: flex;
    width: 900px;
    background-color: white;
    flex-grow: 1;
-}
+} */
 
 .ResumeManager {
    flex-basis: 80%;
