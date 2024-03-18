@@ -3,7 +3,7 @@
    display: flex;
    justify-content: space-around;
    padding: 2rem;
-   background-color: rgb(202, 198, 255);
+   background-color: #f1f5f9;
    gap: 2rem;
 }
 
@@ -12,6 +12,7 @@
    justify-content: start;
    align-items: center;
    gap: 3rem;
+   color: red;
 }
 
 .header nav {
@@ -27,14 +28,14 @@
 }
 
 .formNav {
-   background-color: darkgray;
+   background-color: #ffffff;
    height: fit-content;
    padding: 1rem 0;
    border-radius: 1rem;
 }
 
 .dynamicForm {
-   background-color: darkgray;
+   background-color: #ffffff;
    height: fit-content;
    padding: 2rem;
    border-radius: 1rem;

@@ -85,10 +85,10 @@ const ResumeView = ({ selectedResume }) => {
 
    return (
       <Document
-         author="Your Name"
-         keywords="resume"
-         subject="Resume"
-         title="Resume"
+      // author="Your Name"
+      // keywords="resume"
+      // subject="Resume"
+      // title="Resume"
       >
          <Page size="A4" style={styles.page}>
             <View style={styles.container}>
