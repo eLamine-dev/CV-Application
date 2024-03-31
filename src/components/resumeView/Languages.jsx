@@ -3,7 +3,13 @@ import Title from './Title';
 
 const styles = StyleSheet.create({
    container: {
+      display: 'flex',
+      flexDirection: 'column',
       marginBottom: 10,
+   },
+   entries: {
+      display: 'flex',
+      flexDirection: 'column',
    },
    language: {
       fontFamily: 'Lato Bold',
@@ -18,20 +24,17 @@ const styles = StyleSheet.create({
 const Languages = ({ languagesData }) => (
    <View style={styles.container}>
       <Title>Languages</Title>
-      {languagesData.map((language, index) => (
-         <View key={index}>
-            {language.language && (
-               <Text style={styles.language}>
-                  Language: {language.language}
-               </Text>
-            )}
-            {language.proficiency && (
-               <Text style={styles.proficiency}>
-                  Proficiency: {language.proficiency}
-               </Text>
-            )}
-         </View>
-      ))}
+      <View style={styles.entries}>
+         {languagesData.map((language, index) => (
+            <View key={index}>
+               {language.language && (
+                  <Text style={styles.language}>
+                     {language.language} - {language.proficiency}
+                  </Text>
+               )}
+            </View>
+         ))}
+      </View>
    </View>
 );
 

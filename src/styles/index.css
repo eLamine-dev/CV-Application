@@ -15,9 +15,6 @@
    color: red;
 }
 
-.header nav {
-}
-
 .ResumeEditor {
    display: flex;
 
@@ -52,7 +49,8 @@
 }
 
 /* .ResumeView {
-   display: flex;
+   display: grid;
+   grid-template-columns: 2fr 1fr;
    width: 900px;
    background-color: white;
    flex-grow: 1;

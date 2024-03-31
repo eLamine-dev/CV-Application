@@ -1,7 +1,7 @@
-import { Text, View, Link } from '@react-pdf/renderer';
+import { Text, View, Link, Image } from '@react-pdf/renderer';
 
-const GeneralInfo = ({ generalInfo }) => {
-   const info = generalInfo[0];
+const GeneralInfo = ({ generalInfoData }) => {
+   const info = generalInfoData[0];
 
    const styles = {
       container: {
@@ -12,23 +12,22 @@ const GeneralInfo = ({ generalInfo }) => {
          alignItems: 'stretch',
       },
       detailColumn: {
+         display: 'flex',
          flexDirection: 'column',
          flexGrow: 9,
          textTransform: 'uppercase',
       },
-      linkColumn: {
-         flexDirection: 'column',
-         flexGrow: 2,
-         alignSelf: 'flex-end',
-         justifySelf: 'flex-end',
+      infoItem: {
+         fontSize: 10,
+         fontFamily: 'Lato',
       },
       name: {
          fontSize: 24,
          fontFamily: 'Lato Bold',
+         marginBottom: 10,
       },
       subtitle: {
-         fontSize: 10,
-         justifySelf: 'flex-end',
+         fontSize: 14,
          fontFamily: 'Lato',
       },
       link: {
@@ -36,8 +35,17 @@ const GeneralInfo = ({ generalInfo }) => {
          fontSize: 10,
          color: 'black',
          textDecoration: 'none',
-         alignSelf: 'flex-end',
-         justifySelf: 'flex-end',
+      },
+      imageColumn: {
+         flexDirection: 'column',
+         flexGrow: 1,
+         alignItems: 'center',
+         justifyContent: 'center',
+      },
+      image: {
+         width: 80,
+         height: 80,
+         borderRadius: 40,
       },
    };
 
@@ -47,34 +55,39 @@ const GeneralInfo = ({ generalInfo }) => {
             {info && (
                <>
                   {info.fullName && (
-                     <Text style={styles.name}>Name: {info.fullName}</Text>
+                     <Text style={styles.name}>{info.fullName}</Text>
                   )}
                   {info.jobTitle && (
-                     <Text style={styles.subtitle}>
-                        Job Title: {info.jobTitle}
-                     </Text>
+                     <Text style={styles.subtitle}>{info.jobTitle}</Text>
                   )}
-                  {info.email && (
-                     <Text style={styles.subtitle}>Email: {info.email}</Text>
-                  )}
-                  {info.phone && (
-                     <Text style={styles.subtitle}>Phone: {info.phone}</Text>
-                  )}
-                  {info.address && (
-                     <Text style={styles.subtitle}>
-                        Address: {info.address}
-                     </Text>
-                  )}
+                  <View>
+                     {info.phone && (
+                        <Text style={styles.infoItem}>Phone: {info.phone}</Text>
+                     )}
+                     {info.email && (
+                        <Text style={styles.infoItem}>Email: {info.email}</Text>
+                     )}
+                  </View>
+                  <View>
+                     {info.linkedin && (
+                        <Text style={styles.infoItem}>
+                           LinkedIn: {info.linkedin}
+                        </Text>
+                     )}
+                     {info.location && (
+                        <Text style={styles.infoItem}>
+                           Location: {info.location}
+                        </Text>
+                     )}
+                  </View>
                </>
             )}
          </View>
-         <View style={styles.linkColumn}>
-            {info && info.email && (
-               <Link href={`mailto:${info.email}`} style={styles.link}>
-                  {info.email}
-               </Link>
-            )}
-         </View>
+         {info && info.photo && (
+            <View style={styles.imageColumn}>
+               <Image src={info.photo} style={styles.image} />
+            </View>
+         )}
       </View>
    );
 };
