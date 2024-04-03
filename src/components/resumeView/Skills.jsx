@@ -3,6 +3,8 @@ import Title from './Title';
 
 const styles = StyleSheet.create({
    container: {
+      display: 'flex',
+      flexDirection: 'column',
       marginBottom: 10,
    },
    entries: {

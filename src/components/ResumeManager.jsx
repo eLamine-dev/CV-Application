@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ResumeCard from './resumeManager/ResumeCard';
 import {
    Box,
    Button,
@@ -48,6 +49,7 @@ function ResumeManager({
                alignItems: 'center',
                justifyContent: 'space-between',
                mb: 2,
+               flexBasis: '100%',
             }}
          >
             <Box>
@@ -91,35 +93,17 @@ function ResumeManager({
             )}
          </Box>
 
-         {/* List of saved resumes */}
-         <Stack spacing={2}>
+         {/* Resume cards */}
+
+         <Stack spacing={2} direction="row" flexWrap="wrap">
             {Object.keys(resumes).map((resumeId) => (
-               <Card key={resumeId} sx={{ maxWidth: 300 }}>
-                  <CardContent>
-                     <h3>{resumes[resumeId].name}</h3>
-                     {/* Add preview image of the resume here */}
-                  </CardContent>
-                  <CardActions>
-                     <Button
-                        size="small"
-                        onClick={() => onOpenInEditor(resumeId)}
-                     >
-                        Open in Editor
-                     </Button>
-                     <Button
-                        size="small"
-                        onClick={() => handleMakeCopy(resumeId)}
-                     >
-                        Make a Copy
-                     </Button>
-                     <Button
-                        size="small"
-                        onClick={() => onDeleteResume(resumeId)}
-                     >
-                        Delete
-                     </Button>
-                  </CardActions>
-               </Card>
+               <ResumeCard
+                  key={resumeId}
+                  resume={resumes[resumeId]}
+                  onOpenInEditor={onOpenInEditor}
+                  onMakeCopy={handleMakeCopy}
+                  onDeleteResume={onDeleteResume}
+               />
             ))}
          </Stack>
       </Box>

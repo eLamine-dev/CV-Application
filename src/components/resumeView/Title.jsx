@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
       fontSize: 14,
       marginBottom: 10,
       textTransform: 'uppercase',
+      borderBottom: '3px solid black',
+      paddingBottom: 7,
+      // alignSelf: 'flex-start',
    },
 });
 

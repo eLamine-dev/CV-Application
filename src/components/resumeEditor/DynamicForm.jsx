@@ -67,38 +67,18 @@ function DynamicForm({
    };
 
    return (
-      <Box className="dynamicForm">
-         {activeTab !== 'general info' && selectedResume[activeTab] && (
-            <Stack>
-               <h3>Edit Existing:</h3>
-               {selectedResume[activeTab].map((entry, index) => {
-                  return (
-                     <Chip
-                        variant={
-                           entry.id === formData.id ? 'filled' : 'outlined'
-                        }
-                        onClick={() => {
-                           setFormData(entry);
-                        }}
-                        sx={{
-                           maxWidth: 220,
-                           justifyContent: 'space-between',
-                           // '& > .MuiChip-label': {
-                           //    textAlign: 'left',
-                           // },
-                        }}
-                        onDelete={() => {
-                           deleteEntry(entry.id);
-                        }}
-                        key={index}
-                        label={`${Object.values(entry)[1]} - ${
-                           Object.values(entry)[2]
-                        }`}
-                     ></Chip>
-                  );
-               })}
-            </Stack>
-         )}
+      <Box
+         // className="dynamicForm"
+         sx={{
+            bgcolor: 'background.paper',
+            boxShadow: 1,
+            borderRadius: 2,
+            p: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+         }}
+      >
          <form
             id="editing-form"
             className="inputsContainer"
@@ -113,12 +93,14 @@ function DynamicForm({
                            key: index,
                            label: field.label,
                            placeholder: field.label,
+                           required: field.required || false,
                            multiline: field.multiline || false,
                            size: 'small',
                            value: formData[field.id] || '',
                            onChange: (e) => {
                               handleInputChange(field.id, e.target.value);
                            },
+                           fullWidth: true,
                         })}
                      {field.component === Select && (
                         <FormControl sx={{ m: 1, minWidth: 180 }}>
@@ -161,8 +143,44 @@ function DynamicForm({
                   </div>
                );
             })}
-            <button type="submit">Save</button>
+            <div>
+               <button type="submit">Save</button>
+               <button type="button" onClick={() => resetFormData()}>
+                  Reset
+               </button>
+            </div>
          </form>
+
+         {activeTab !== 'general info' && selectedResume[activeTab] && (
+            <Stack>
+               {selectedResume[activeTab].map((entry, index) => {
+                  return (
+                     <Chip
+                        variant={
+                           entry.id === formData.id ? 'filled' : 'outlined'
+                        }
+                        onClick={() => {
+                           setFormData(entry);
+                        }}
+                        sx={{
+                           maxWidth: 220,
+                           justifyContent: 'space-between',
+                           // '& > .MuiChip-label': {
+                           //    textAlign: 'left',
+                           // },
+                        }}
+                        onDelete={() => {
+                           deleteEntry(entry.id);
+                        }}
+                        key={index}
+                        label={`${Object.values(entry)[1]} - ${
+                           Object.values(entry)[2]
+                        }`}
+                     ></Chip>
+                  );
+               })}
+            </Stack>
+         )}
       </Box>
    );
 }
