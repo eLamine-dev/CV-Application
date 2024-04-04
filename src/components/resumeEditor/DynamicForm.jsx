@@ -4,6 +4,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
 
 import dayjs from 'dayjs';
+import Divider from '@mui/material/Divider';
 
 import {
    TextField,
@@ -152,34 +153,37 @@ function DynamicForm({
          </form>
 
          {activeTab !== 'general info' && selectedResume[activeTab] && (
-            <Stack>
-               {selectedResume[activeTab].map((entry, index) => {
-                  return (
-                     <Chip
-                        variant={
-                           entry.id === formData.id ? 'filled' : 'outlined'
-                        }
-                        onClick={() => {
-                           setFormData(entry);
-                        }}
-                        sx={{
-                           maxWidth: 220,
-                           justifyContent: 'space-between',
-                           // '& > .MuiChip-label': {
-                           //    textAlign: 'left',
-                           // },
-                        }}
-                        onDelete={() => {
-                           deleteEntry(entry.id);
-                        }}
-                        key={index}
-                        label={`${Object.values(entry)[1]} - ${
-                           Object.values(entry)[2]
-                        }`}
-                     ></Chip>
-                  );
-               })}
-            </Stack>
+            <>
+               <Divider />
+               <Stack>
+                  {selectedResume[activeTab].map((entry, index) => {
+                     return (
+                        <Chip
+                           variant={
+                              entry.id === formData.id ? 'filled' : 'outlined'
+                           }
+                           onClick={() => {
+                              setFormData(entry);
+                           }}
+                           sx={{
+                              maxWidth: 220,
+                              justifyContent: 'space-between',
+                              // '& > .MuiChip-label': {
+                              //    textAlign: 'left',
+                              // },
+                           }}
+                           onDelete={() => {
+                              deleteEntry(entry.id);
+                           }}
+                           key={index}
+                           label={`${Object.values(entry)[1]} - ${
+                              Object.values(entry)[2]
+                           }`}
+                        ></Chip>
+                     );
+                  })}
+               </Stack>
+            </>
          )}
       </Box>
    );
