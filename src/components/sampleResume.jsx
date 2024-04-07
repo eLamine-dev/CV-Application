@@ -2,15 +2,16 @@ import dayjs from 'dayjs';
 
 const sampleResume = {
    id: 'id01',
-   name: 'Sample resume',
+
    'general info': [
       {
          id: 'gi01',
+         name: 'Sample resume',
          fullName: 'John Doe',
          jobTitle: 'Software Developer',
          email: 'john.doe@example.com',
          phone: '123-456-7890',
-         address: '123 Main Street, City ville',
+         location: 'City ville, USA',
       },
    ],
    education: [

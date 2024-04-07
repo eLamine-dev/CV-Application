@@ -10,6 +10,8 @@ import {
    TextField,
 } from '@mui/material';
 
+const styles = {};
+
 function ResumeManager({
    resumes,
    onNewResume,
@@ -31,10 +33,29 @@ function ResumeManager({
 
    const handleMakeCopy = (resumeId) => {
       const originalResume = resumes[resumeId];
+      let copyNumber = 1;
+      let baseName = originalResume['general info'][0].name;
+
+      while (
+         Object.values(resumes).some((resume) => {
+            return resume['general info'][0].name === baseName;
+         })
+      ) {
+         copyNumber++;
+         baseName =
+            originalResume['general info'][0].name.replace(/ copy \d+$/, '') +
+            ` copy ${copyNumber}`;
+      }
+
       const copiedResume = {
          ...originalResume,
          id: Date.now().toString(),
-         name: `${originalResume.name}-copy`,
+         'general info': [
+            {
+               ...originalResume['general info'][0],
+               name: baseName,
+            },
+         ],
       };
 
       onMakeCopy(copiedResume);
@@ -42,7 +63,6 @@ function ResumeManager({
 
    return (
       <Box className="ResumeManager">
-         {/* Welcome message and new resume creation section */}
          <Box
             sx={{
                display: 'flex',
@@ -56,44 +76,49 @@ function ResumeManager({
                <h2>Resumes</h2>
                <p>Create, edit and manage your resumes.</p>
             </Box>
-            {!isCreatingNewResume ? (
-               <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => setIsCreatingNewResume(true)}
-               >
-                  New Resume
-               </Button>
-            ) : (
-               <Stack direction="row" spacing={2}>
-                  <TextField
-                     placeholder="New Resume"
-                     label="Resume name"
-                     size="small"
-                     type="text"
-                     id="newResumeName"
-                     value={newResumeName}
-                     onChange={(e) => setNewResumeName(e.target.value)}
-                  />
+            <Box sx={{ display: 'flex', alignItems: 'center', height: '3rem' }}>
+               {!isCreatingNewResume ? (
                   <Button
+                     disableElevation
+                     sx={{ textTransform: 'none' }}
                      variant="contained"
-                     size="small"
-                     onClick={handleCreateNewResume}
+                     size="medium"
+                     onClick={() => setIsCreatingNewResume(true)}
                   >
-                     Save
+                     New Resume
                   </Button>
-                  <Button
-                     variant="contained"
-                     size="small"
-                     onClick={() => setIsCreatingNewResume(false)}
-                  >
-                     Close
-                  </Button>
-               </Stack>
-            )}
+               ) : (
+                  <Stack direction="row" spacing={2} alignItems="center">
+                     <TextField
+                        inputProps={{ maxLength: 20 }}
+                        placeholder="New Resume"
+                        label="Resume name"
+                        size="small"
+                        type="text"
+                        id="newResumeName"
+                        value={newResumeName}
+                        onChange={(e) => setNewResumeName(e.target.value)}
+                     />
+                     <Button
+                        disableElevation
+                        variant="contained"
+                        size="medium"
+                        onClick={handleCreateNewResume}
+                     >
+                        Save
+                     </Button>
+                     <Button
+                        disableElevation
+                        variant="contained"
+                        size="medium"
+                        onClick={() => setIsCreatingNewResume(false)}
+                     >
+                        Close
+                     </Button>
+                  </Stack>
+               )}
+            </Box>
          </Box>
-
-         {/* Resume cards */}
 
          <Stack spacing={2} direction="row" flexWrap="wrap">
             {Object.keys(resumes).map((resumeId) => (

@@ -4,10 +4,24 @@ import { DateField } from '@mui/x-date-pickers';
 const config = {
    'general info': [
       {
+         id: 'name',
+         component: TextField,
+         type: 'text',
+         label: 'Resume Name',
+         required: true,
+      },
+      {
          id: 'fullName',
          component: TextField,
          type: 'text',
          label: 'Full Name',
+         required: true,
+      },
+      {
+         id: 'jobTitle',
+         component: TextField,
+         type: 'text',
+         label: 'Title',
          required: true,
       },
       {
@@ -25,9 +39,9 @@ const config = {
          required: true,
       },
       {
-         id: 'address',
+         id: 'location',
          component: TextField,
-         label: 'Address',
+         label: 'Location',
       },
    ],
    education: [

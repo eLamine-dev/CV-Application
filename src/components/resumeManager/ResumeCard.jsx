@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
    Card,
    CardContent,
@@ -6,13 +7,18 @@ import {
    Grid,
    Typography,
    CardMedia,
+   TextField,
 } from '@mui/material';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import thumbnail from '../../assets/images/thumbnail.png';
+import EditIcon from '@mui/icons-material/Edit';
+import { Edit } from '@mui/icons-material';
 
 const styles = {
    container: {
-      width: '400px',
-      spacing: '10px',
+      width: '420px',
    },
    buttons: {
       display: 'flex',
@@ -31,8 +37,21 @@ const styles = {
    resumeName: {
       fontSize: '1rem',
       fontWeight: 'bold',
+      WrapText: 'break-word',
       mb: 1,
       mt: 1,
+      ml: 1,
+   },
+
+   button: {
+      textTransform: 'none',
+      fontWeight: 'bold',
+      fontSize: '0.8rem',
+   },
+   textField: {
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      width: '100%',
    },
 };
 
@@ -40,7 +59,12 @@ const ResumeCard = ({ resume, onOpenInEditor, onMakeCopy, onDeleteResume }) => {
    return (
       <Card sx={{ boxShadow: 0 }}>
          <CardContent>
-            <Grid sx={{ ...styles.container }} container alignItems="start">
+            <Grid
+               spacing={4}
+               sx={{ ...styles.container }}
+               container
+               alignItems="start"
+            >
                <Grid item xs={5}>
                   <CardMedia
                      sx={styles.img}
@@ -50,7 +74,7 @@ const ResumeCard = ({ resume, onOpenInEditor, onMakeCopy, onDeleteResume }) => {
                   />
                </Grid>
 
-               <Grid item>
+               <Grid item xs={7}>
                   <CardActions sx={styles.buttons}>
                      <Typography
                         variant="h5"
@@ -58,23 +82,33 @@ const ResumeCard = ({ resume, onOpenInEditor, onMakeCopy, onDeleteResume }) => {
                         gutterBottom
                         sx={styles.resumeName}
                      >
-                        {resume.name}
+                        {resume['general info'][0].name}
                      </Typography>
-                     <button
+
+                     <Button
+                        sx={styles.button}
                         size="small"
                         onClick={() => onOpenInEditor(resume.id)}
+                        startIcon={<EditNoteOutlinedIcon />}
                      >
                         Open in Editor
-                     </button>
-                     <button size="small" onClick={() => onMakeCopy(resume.id)}>
+                     </Button>
+                     <Button
+                        sx={styles.button}
+                        size="small"
+                        onClick={() => onMakeCopy(resume.id)}
+                        startIcon={<ContentCopyOutlinedIcon />}
+                     >
                         Make a Copy
-                     </button>
-                     <button
+                     </Button>
+                     <Button
+                        sx={styles.button}
+                        startIcon={<DeleteOutlineOutlinedIcon />}
                         size="small"
                         onClick={() => onDeleteResume(resume.id)}
                      >
                         Delete
-                     </button>
+                     </Button>
                   </CardActions>
                </Grid>
             </Grid>
@@ -83,30 +117,4 @@ const ResumeCard = ({ resume, onOpenInEditor, onMakeCopy, onDeleteResume }) => {
    );
 };
 
-// const ResumeCard = ({ resume, onOpenInEditor, onMakeCopy, onDeleteResume }) => {
-//    return (
-//       <div style={styles.container}>
-//          <img
-//             style={styles.image}
-//             src={resume.thumbnail}
-//             alt="Resume Thumbnail"
-//          />
-
-//          <div style={styles.buttons}>
-//             <h3 style={styles.resumeTitle}>{resume.name}</h3>
-
-//             <Button size="small" onClick={() => onOpenInEditor(resume.id)}>
-//                Open in Editor
-//             </Button>
-//             <Button size="small" onClick={() => onMakeCopy(resume.id)}>
-//                Make a Copy
-//             </Button>
-//             <Button size="small" onClick={() => onDeleteResume(resume.id)}>
-//                Delete
-//             </Button>
-//          </div>
-//       </div>
-//    );
-// };
-// export default ResumeCard;
 export default ResumeCard;

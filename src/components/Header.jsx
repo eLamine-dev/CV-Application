@@ -8,11 +8,11 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import SendIcon from '@mui/icons-material/Send';
 
-const settings = ['Profile', 'Dashboard', 'Logout'];
+const settings = ['Dashboard', 'Logout'];
 
-function Header() {
+function Header({ showResumeManager }) {
    const [anchorElUser, setAnchorElUser] = useState(null);
 
    const handleOpenUserMenu = (event) => {
@@ -26,30 +26,45 @@ function Header() {
    return (
       <AppBar
          sx={{
+            boxShadow: 'none',
             backgroundColor: '#ffffff',
             color: '#020617',
             borderBottom: '1px solid #cbd5e1',
          }}
-         position="static"
       >
-         <Toolbar disableGutters>
-            <AdbIcon sx={{ display: 'flex', mr: 1 }} />
+         <Toolbar
+            sx={{
+               display: 'flex',
+               alignItems: 'center',
+               width: '80%',
+               mx: 'auto',
+            }}
+            disableGutters
+         >
+            <SendIcon
+               sx={{
+                  rotate: '320deg',
+                  color: 'green',
+
+                  fontSize: '2rem',
+                  transform: 'translateY(-5px)',
+               }}
+            />
             <Typography
                variant="h6"
                noWrap
                component="a"
-               href="#app-bar-with-responsive-menu"
                sx={{
                   mr: 2,
                   flexGrow: 1,
                   fontFamily: 'monospace',
                   fontWeight: 700,
-                  letterSpacing: '.3rem',
+                  // letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
                }}
             >
-               LOGO
+               Craft
             </Typography>
 
             <Box sx={{ flexGrow: 0 }}>
@@ -75,7 +90,15 @@ function Header() {
                   onClose={handleCloseUserMenu}
                >
                   {settings.map((setting) => (
-                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                     <MenuItem
+                        key={setting}
+                        onClick={() => {
+                           handleCloseUserMenu;
+                           if (setting === 'Dashboard') {
+                              showResumeManager();
+                           }
+                        }}
+                     >
                         <Typography textAlign="center">{setting}</Typography>
                      </MenuItem>
                   ))}

@@ -17,8 +17,12 @@ function App() {
       if (newResumeName.trim() !== '') {
          const newResume = {
             id: Date.now().toString(),
-            name: newResumeName,
-            'general info': [],
+
+            'general info': [
+               {
+                  name: newResumeName,
+               },
+            ],
          };
 
          setResumes({ ...resumes, [newResume.id]: newResume });
@@ -56,8 +60,13 @@ function App() {
 
    const handleDownloadPdf = (resumeId) => {};
 
+   const showResumeManager = () => {
+      setSelectedResume(null);
+   };
+
    return (
       <div className="App">
+         <Header showResumeManager={showResumeManager} />
          {selectedResume ? (
             <>
                <ResumeEditor
