@@ -8,7 +8,7 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import SendIcon from '@mui/icons-material/Send';
+import RocketIcon from '@mui/icons-material/Rocket';
 
 const settings = ['Dashboard', 'Logout'];
 
@@ -41,13 +41,13 @@ function Header({ showResumeManager }) {
             }}
             disableGutters
          >
-            <SendIcon
+            <RocketIcon
                sx={{
-                  rotate: '320deg',
-                  color: 'green',
-
-                  fontSize: '2rem',
-                  transform: 'translateY(-5px)',
+                  // rotate: '10deg',
+                  color: 'red',
+                  mr: 1,
+                  fontSize: '3rem',
+                  pb: 0.5,
                }}
             />
             <Typography
@@ -57,14 +57,10 @@ function Header({ showResumeManager }) {
                sx={{
                   mr: 2,
                   flexGrow: 1,
-                  fontFamily: 'monospace',
                   fontWeight: 700,
-                  // letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
                }}
             >
-               Craft
+               RocketCV
             </Typography>
 
             <Box sx={{ flexGrow: 0 }}>

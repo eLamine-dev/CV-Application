@@ -1,6 +1,8 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import Title from './Title';
 import dayjs from 'dayjs';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const styles = StyleSheet.create({
    container: {
@@ -11,27 +13,33 @@ const styles = StyleSheet.create({
    },
    entries: {
       display: 'flex',
-      color: 'blue',
       flexDirection: 'column',
    },
    entry: {
       display: 'flex',
+      gap: 6,
       flexDirection: 'column',
    },
    degree: {
-      fontFamily: 'Lato Bold',
-      fontSize: 12,
-      marginBottom: 5,
+      fontSize: 16,
+      marginBottom: 2,
    },
    school: {
-      fontFamily: 'Lato',
-      fontSize: 10,
-      marginBottom: 3,
+      fontSize: 12,
+      fontWeight: 'bold',
+
+      color: '#1e8fff',
    },
    duration: {
-      fontFamily: 'Lato',
-      fontSize: 8,
-      fontStyle: 'italic',
+      fontSize: 10,
+      marginRight: 20,
+   },
+   location: {
+      fontSize: 10,
+   },
+   icon: {
+      marginRight: 5,
+      fontSize: 12,
    },
 });
 
@@ -47,13 +55,31 @@ const Education = ({ educationData }) => (
                {education.school && (
                   <Text style={styles.school}>{education.school}</Text>
                )}
-               {education.startDate && education.endDate && (
-                  <Text style={styles.duration}>
-                     {dayjs(education.startDate).format('MMM YYYY')} -{' '}
-                     {dayjs(education.endDate).format('MMM YYYY')} |{' '}
-                     {education.location}
-                  </Text>
-               )}
+               <View
+                  style={{
+                     color: '#384347',
+                     display: 'flex',
+                     alignItems: 'center',
+                  }}
+               >
+                  {education.startDate && education.endDate && (
+                     <>
+                        <CalendarMonthIcon style={styles.icon} />
+                        <Text style={styles.duration}>
+                           {dayjs(education.startDate).format('MMM YYYY')} -{' '}
+                           {dayjs(education.endDate).format('MMM YYYY')}
+                        </Text>
+                     </>
+                  )}
+                  {education.location && (
+                     <>
+                        <LocationOnIcon style={styles.icon} />
+                        <Text style={styles.location}>
+                           {education.location}
+                        </Text>
+                     </>
+                  )}
+               </View>
             </View>
          ))}
       </View>

@@ -1,37 +1,46 @@
 import { Text, View, Link, Image } from '@react-pdf/renderer';
+import PhoneIcon from '@mui/icons-material/Phone';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LinkIcon from '@mui/icons-material/Link';
 
 const GeneralInfo = ({ generalInfoData }) => {
    const info = generalInfoData[0];
 
    const styles = {
       container: {
-         flexDirection: 'row',
-         borderBottomWidth: 2,
-         borderBottomColor: '#112131',
-         borderBottomStyle: 'solid',
-         alignItems: 'stretch',
+         display: 'flex',
       },
       detailColumn: {
          display: 'flex',
          flexDirection: 'column',
-         flexGrow: 9,
+         gap: 3,
          textTransform: 'uppercase',
+         fontWeight: 'bold',
       },
       infoItem: {
          fontSize: 10,
-         fontFamily: 'Lato',
+         display: 'flex',
+         alignItems: 'center',
+         gap: 5,
       },
       name: {
          fontSize: 24,
-         fontFamily: 'Lato Bold',
-         marginBottom: 10,
+         marginBottom: 5,
       },
       subtitle: {
-         fontSize: 14,
-         fontFamily: 'Lato',
+         fontSize: 16,
+         fontWeight: 'bold',
+
+         color: '#1e8fff',
       },
+      contactInfo: {
+         display: 'grid',
+         gap: 4,
+         gridTemplateColumns: '1fr 1fr',
+      },
+
       link: {
-         fontFamily: 'Lato',
          fontSize: 10,
          color: 'black',
          textDecoration: 'none',
@@ -43,9 +52,13 @@ const GeneralInfo = ({ generalInfoData }) => {
          justifyContent: 'center',
       },
       image: {
-         width: 80,
-         height: 80,
+         width: 8,
+         height: 8,
          borderRadius: 40,
+      },
+      icon: {
+         fontSize: 10,
+         color: '#1e8fff',
       },
    };
 
@@ -60,34 +73,41 @@ const GeneralInfo = ({ generalInfoData }) => {
                   {info.jobTitle && (
                      <Text style={styles.subtitle}>{info.jobTitle}</Text>
                   )}
-                  <View>
+                  <View style={styles.contactInfo}>
                      {info.phone && (
-                        <Text style={styles.infoItem}>Phone: {info.phone}</Text>
+                        <View style={styles.infoItem}>
+                           <PhoneIcon style={styles.icon} />
+                           <Text> {info.phone}</Text>
+                        </View>
                      )}
                      {info.email && (
-                        <Text style={styles.infoItem}>Email: {info.email}</Text>
+                        <View style={styles.infoItem}>
+                           <AlternateEmailIcon style={styles.icon} />
+                           <Text>{info.email}</Text>
+                        </View>
                      )}
-                  </View>
-                  <View>
+
                      {info.linkedin && (
-                        <Text style={styles.infoItem}>
-                           LinkedIn: {info.linkedin}
-                        </Text>
+                        <View style={styles.infoItem}>
+                           <LinkIcon style={styles.icon} />
+                           <Text>{info.linkedin}</Text>
+                        </View>
                      )}
                      {info.location && (
-                        <Text style={styles.infoItem}>
-                           Location: {info.location}
-                        </Text>
+                        <View style={styles.infoItem}>
+                           <LocationOnIcon style={styles.icon} />
+                           <Text>{info.location}</Text>
+                        </View>
                      )}
                   </View>
                </>
             )}
          </View>
-         {info && info.photo && (
+         {/* {info && info.photo && (
             <View style={styles.imageColumn}>
                <Image src={info.photo} style={styles.image} />
             </View>
-         )}
+         )} */}
       </View>
    );
 };

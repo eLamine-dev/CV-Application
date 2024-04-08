@@ -1,6 +1,8 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import Title from './Title';
 import dayjs from 'dayjs';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LinkIcon from '@mui/icons-material/Link';
 
 const styles = StyleSheet.create({
    container: {
@@ -16,24 +18,32 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'column',
       marginBottom: 10,
+      gap: 6,
    },
    projectName: {
-      fontFamily: 'Lato Bold',
-      fontSize: 10,
+      fontSize: 16,
+      marginBottom: 2,
    },
    description: {
-      fontFamily: 'Lato',
-      fontSize: 10,
+      fontSize: 12,
    },
    projectLink: {
-      fontFamily: 'Lato',
       fontSize: 10,
-      color: 'blue',
-      textDecoration: 'underline',
+      color: '#384347',
+      textDecoration: 'none',
    },
    duration: {
-      fontFamily: 'Lato',
       fontSize: 10,
+      marginRight: 20,
+   },
+   icon: {
+      marginRight: 5,
+      fontSize: 12,
+   },
+   infoWithIcon: {
+      color: '#384347',
+      display: 'flex',
+      alignItems: 'center',
    },
 });
 
@@ -44,25 +54,27 @@ const Projects = ({ projectsData }) => (
          {projectsData.map((project, index) => (
             <View style={styles.entry} key={index}>
                {project.projectName && (
-                  <Text style={styles.projectName}>
-                     Project Name: {project.projectName}
-                  </Text>
-               )}
-               {project.description && (
-                  <Text style={styles.description}>
-                     Description: {project.description}
-                  </Text>
-               )}
-               {project.projectLink && (
-                  <Text style={styles.projectLink}>
-                     Project Link: {project.projectLink}
-                  </Text>
+                  <Text style={styles.projectName}>{project.projectName}</Text>
                )}
                {project.startDate && project.endDate && (
-                  <Text style={styles.duration}>
-                     Duration: {dayjs(project.startDate).format('DD/MM/YYYY')} -{' '}
-                     {dayjs(project.endDate).format('DD/MM/YYYY')}
-                  </Text>
+                  <View style={styles.infoWithIcon}>
+                     <CalendarMonthIcon style={styles.icon} />
+                     <Text style={styles.duration}>
+                        {dayjs(project.startDate).format('MM/YYYY')} -{' '}
+                        {dayjs(project.endDate).format('MM/YYYY')}
+                     </Text>
+                  </View>
+               )}
+               {project.projectLink && (
+                  <View style={styles.infoWithIcon}>
+                     <LinkIcon style={styles.icon} />
+                     <Text style={styles.projectLink}>
+                        {project.projectLink}
+                     </Text>
+                  </View>
+               )}
+               {project.description && (
+                  <Text style={styles.description}>{project.description}</Text>
                )}
             </View>
          ))}

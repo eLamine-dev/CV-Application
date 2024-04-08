@@ -1,6 +1,8 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import Title from './Title';
 import dayjs from 'dayjs';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const styles = StyleSheet.create({
    container: {
@@ -10,32 +12,37 @@ const styles = StyleSheet.create({
    },
    entries: {
       display: 'flex',
-      color: 'blue',
+
       flexDirection: 'column',
    },
    entry: {
       display: 'flex',
+      gap: 6,
       flexDirection: 'column',
    },
    position: {
-      fontFamily: 'Lato Bold',
-      fontSize: 12,
-      marginBottom: 5,
+      fontSize: 16,
+      marginBottom: 2,
    },
    company: {
-      fontFamily: 'Lato',
-      fontSize: 10,
-      marginBottom: 3,
+      fontSize: 12,
+      fontWeight: 'bold',
+
+      color: '#1e8fff',
    },
    description: {
-      fontFamily: 'Lato',
-      fontSize: 10,
-      marginBottom: 3,
+      fontSize: 12,
    },
    duration: {
-      fontFamily: 'Lato',
       fontSize: 10,
-      fontStyle: 'italic',
+      marginRight: 20,
+   },
+   location: {
+      fontSize: 10,
+   },
+   icon: {
+      marginRight: 5,
+      fontSize: 12,
    },
 });
 
@@ -46,25 +53,41 @@ const Experience = ({ experienceData }) => (
          {experienceData.map((experience, index) => (
             <View style={styles.entry} key={index}>
                {experience.position && (
-                  <Text style={styles.position}>
-                     Position: {experience.position}
-                  </Text>
+                  <Text style={styles.position}>{experience.position}</Text>
                )}
                {experience.company && (
-                  <Text style={styles.company}>
-                     Company: {experience.company}
-                  </Text>
+                  <Text style={styles.company}>{experience.company}</Text>
                )}
+               <View
+                  style={{
+                     color: '#384347',
+                     display: 'flex',
+                     alignItems: 'center',
+                  }}
+               >
+                  {experience.startDate && experience.endDate && (
+                     <>
+                        <CalendarMonthIcon style={styles.icon} />
+                        <Text style={styles.duration}>
+                           {' '}
+                           {dayjs(experience.startDate).format(
+                              'MM/YYYY'
+                           )} - {dayjs(experience.endDate).format('MM/YYYY')}
+                        </Text>
+                     </>
+                  )}
+                  {experience.location && (
+                     <>
+                        <LocationOnIcon style={styles.icon} />
+                        <Text style={styles.location}>
+                           {experience.location}
+                        </Text>
+                     </>
+                  )}
+               </View>
                {experience.workDescription && (
                   <Text style={styles.description}>
-                     Description: {experience.workDescription}
-                  </Text>
-               )}
-               {experience.startDate && experience.endDate && (
-                  <Text style={styles.duration}>
-                     Duration:{' '}
-                     {dayjs(experience.startDate).format('DD/MM/YYYY')} -{' '}
-                     {dayjs(experience.endDate).format('DD/MM/YYYY')}
+                     {experience.workDescription}
                   </Text>
                )}
             </View>

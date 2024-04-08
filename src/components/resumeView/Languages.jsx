@@ -12,12 +12,12 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
    },
    language: {
-      fontFamily: 'Lato Bold',
-      fontSize: 10,
+      fontSize: 12,
+      fontWeight: 'bold',
+      marginRight: 30,
    },
    proficiency: {
-      fontFamily: 'Lato',
-      fontSize: 10,
+      fontSize: 12,
    },
 });
 
@@ -28,9 +28,12 @@ const Languages = ({ languagesData }) => (
          {languagesData.map((language, index) => (
             <View key={index}>
                {language.language && (
-                  <Text style={styles.language}>
-                     {language.language} - {language.proficiency}
-                  </Text>
+                  <>
+                     <Text style={styles.language}>{language.language}</Text>
+                     <Text style={styles.proficiency}>
+                        {language.proficiency}
+                     </Text>
+                  </>
                )}
             </View>
          ))}

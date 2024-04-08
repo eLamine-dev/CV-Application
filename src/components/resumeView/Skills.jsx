@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
       marginBottom: 10,
    },
    entries: {
+      width: '100%',
       display: 'flex',
       flexWrap: 'wrap',
       gap: 10,
@@ -15,16 +16,12 @@ const styles = StyleSheet.create({
    entry: {
       display: 'flex',
       justifyContent: 'space-between',
-      padding: 3,
-      border: '1px solid black',
+      padding: 4,
+      border: '1px solid grey',
    },
    skillName: {
-      fontFamily: 'Lato Bold',
-      fontSize: 10,
-   },
-   proficiency: {
-      fontFamily: 'Lato',
-      fontSize: 10,
+      fontWeight: 'bold',
+      fontSize: 12,
    },
 });
 

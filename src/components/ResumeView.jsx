@@ -17,58 +17,35 @@ import Languages from './resumeView/Languages';
 const styles = StyleSheet.create({
    page: {
       padding: 30,
+      fontFamily: 'Lato',
    },
    container: {
-      display: 'flex',
-      width: '900px',
+      display: 'grid',
+      width: 600,
+      height: 846,
       gridTemplateColumns: '2fr 1fr',
-      backgroundColor: 'white',
-      flexWrap: 'wrap',
+      gridTemplateRows: 'auto 1fr',
+      border: '1px solid black',
+      padding: 40,
    },
    header: {
-      width: '100%',
-      marginBottom: 20,
+      gridColumn: '1 / 3',
+      flexShrink: 0,
+      marginBottom: 30,
    },
    leftColumn: {
       display: 'flex',
       flexDirection: 'column',
-      width: '60%',
+      justifyContent: 'start',
+      gap: 10,
       marginRight: '5%',
    },
    rightColumn: {
       display: 'flex',
       flexDirection: 'column',
-      width: '35%',
+      justifyContent: 'start',
+      gap: 10,
    },
-   image: {
-      marginBottom: 10,
-      width: '100%',
-   },
-   generalInfoContainer: {
-      fontSize: 12,
-      fontFamily: 'Lato',
-      marginBottom: 20,
-   },
-});
-
-Font.register({
-   family: 'Open Sans',
-   src: `https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf`,
-});
-
-Font.register({
-   family: 'Lato',
-   src: `https://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wWw.ttf`,
-});
-
-Font.register({
-   family: 'Lato Italic',
-   src: `https://fonts.gstatic.com/s/lato/v16/S6u8w4BMUTPHjxsAXC-v.ttf`,
-});
-
-Font.register({
-   family: 'Lato Bold',
-   src: `https://fonts.gstatic.com/s/lato/v16/S6u9w4BMUTPHh6UVSwiPHA.ttf`,
 });
 
 const ResumeView = ({ selectedResume }) => {
