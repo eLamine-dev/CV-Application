@@ -62,12 +62,14 @@ const Education = ({ educationData }) => (
                      alignItems: 'center',
                   }}
                >
-                  {education.startDate && education.endDate && (
+                  {education.startDate && (
                      <>
                         <CalendarMonthIcon style={styles.icon} />
                         <Text style={styles.duration}>
-                           {dayjs(education.startDate).format('MMM YYYY')} -{' '}
-                           {dayjs(education.endDate).format('MMM YYYY')}
+                           {dayjs(education.startDate).format('MM/YYYY')} -{' '}
+                           {education.endDate
+                              ? dayjs(education.endDate).format('MM/YYYY')
+                              : 'Ongoing'}
                         </Text>
                      </>
                   )}

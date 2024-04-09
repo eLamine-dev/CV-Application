@@ -1,4 +1,5 @@
-import { Text, View, Link, Image } from '@react-pdf/renderer';
+import { Text, View, Image } from '@react-pdf/renderer';
+import Link from '@mui/material/Link';
 import PhoneIcon from '@mui/icons-material/Phone';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -6,6 +7,7 @@ import LinkIcon from '@mui/icons-material/Link';
 
 const GeneralInfo = ({ generalInfoData }) => {
    const info = generalInfoData[0];
+   const link = `#${info.link}`;
 
    const styles = {
       container: {
@@ -23,6 +25,7 @@ const GeneralInfo = ({ generalInfoData }) => {
          display: 'flex',
          alignItems: 'center',
          gap: 5,
+         textTransform: 'none',
       },
       name: {
          fontSize: 24,
@@ -38,11 +41,11 @@ const GeneralInfo = ({ generalInfoData }) => {
          display: 'grid',
          gap: 4,
          gridTemplateColumns: '1fr 1fr',
+         gridTemplateRows: '1fr 1fr',
       },
 
       link: {
-         fontSize: 10,
-         color: 'black',
+         color: 'inherit',
          textDecoration: 'none',
       },
       imageColumn: {
@@ -57,7 +60,7 @@ const GeneralInfo = ({ generalInfoData }) => {
          borderRadius: 40,
       },
       icon: {
-         fontSize: 10,
+         fontSize: 12,
          color: '#1e8fff',
       },
    };
@@ -86,17 +89,18 @@ const GeneralInfo = ({ generalInfoData }) => {
                            <Text>{info.email}</Text>
                         </View>
                      )}
-
-                     {info.linkedin && (
-                        <View style={styles.infoItem}>
-                           <LinkIcon style={styles.icon} />
-                           <Text>{info.linkedin}</Text>
-                        </View>
-                     )}
                      {info.location && (
                         <View style={styles.infoItem}>
                            <LocationOnIcon style={styles.icon} />
                            <Text>{info.location}</Text>
+                        </View>
+                     )}
+                     {info.link && (
+                        <View style={styles.infoItem}>
+                           <LinkIcon style={styles.icon} />
+                           <Link style={styles.link} href={info.link}>
+                              {info.link}
+                           </Link>
                         </View>
                      )}
                   </View>

@@ -78,6 +78,8 @@ function DynamicForm({
             display: 'flex',
             flexDirection: 'column',
             gap: 2,
+            flexGrow: 1,
+            minWidth: 300,
          }}
       >
          <form
@@ -87,7 +89,7 @@ function DynamicForm({
          >
             {config[activeTab].map((field, index) => {
                return (
-                  <div key={index}>
+                  <div className="inputContainer" key={index}>
                      {field.component === TextField &&
                         createElement(field.component, {
                            id: field.id,
@@ -96,6 +98,7 @@ function DynamicForm({
                            placeholder: field.label,
                            required: field.required || false,
                            multiline: field.multiline || false,
+                           rows: field.rows || 1,
                            size: 'small',
                            value: formData[field.id] || '',
                            onChange: (e) => {
@@ -115,6 +118,7 @@ function DynamicForm({
                                  value: formData[field.id] || '',
                                  onChange: (e) =>
                                     handleInputChange(field.id, e.target.value),
+                                 fullWidth: true,
                               },
                               field.options.map((option, index) => {
                                  return (
@@ -138,24 +142,43 @@ function DynamicForm({
                               onChange={(date) => {
                                  handleInputChange(field.id, dayjs(date));
                               }}
+                              fullWidth={true}
+                              format="MM/YYYY"
                            />
                         </LocalizationProvider>
                      )}
                   </div>
                );
             })}
-            <div>
-               <button type="submit">Save</button>
-               <button type="button" onClick={() => resetFormData()}>
+            <div
+               style={{
+                  display: 'flex',
+                  gap: '1rem',
+                  justifyContent: 'center',
+               }}
+            >
+               <Button
+                  sx={{ textTransform: 'none' }}
+                  variant="outlined"
+                  type="button"
+                  onClick={() => resetFormData()}
+               >
                   Reset
-               </button>
+               </Button>
+               <Button
+                  sx={{ textTransform: 'none' }}
+                  variant="outlined"
+                  type="submit"
+               >
+                  Save
+               </Button>
             </div>
          </form>
 
          {activeTab !== 'general info' && selectedResume[activeTab] && (
             <>
                <Divider />
-               <Stack>
+               <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
                   {selectedResume[activeTab].map((entry, index) => {
                      return (
                         <Chip
@@ -166,19 +189,20 @@ function DynamicForm({
                               setFormData(entry);
                            }}
                            sx={{
-                              maxWidth: 220,
+                              width: 'fit-content',
+                              maxWidth: '200px',
+                              lineHeight: '2rem',
                               justifyContent: 'space-between',
                               // '& > .MuiChip-label': {
                               //    textAlign: 'left',
+                              //    lineHeight: '2rem',
                               // },
                            }}
                            onDelete={() => {
                               deleteEntry(entry.id);
                            }}
                            key={index}
-                           label={`${Object.values(entry)[1]} - ${
-                              Object.values(entry)[2]
-                           }`}
+                           label={Object.values(entry)[1]}
                         ></Chip>
                      );
                   })}

@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import Title from './Title';
 import dayjs from 'dayjs';
+import Link from '@mui/material/Link';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LinkIcon from '@mui/icons-material/Link';
 
@@ -56,21 +57,26 @@ const Projects = ({ projectsData }) => (
                {project.projectName && (
                   <Text style={styles.projectName}>{project.projectName}</Text>
                )}
-               {project.startDate && project.endDate && (
+               {project.startDate && (
                   <View style={styles.infoWithIcon}>
                      <CalendarMonthIcon style={styles.icon} />
                      <Text style={styles.duration}>
                         {dayjs(project.startDate).format('MM/YYYY')} -{' '}
-                        {dayjs(project.endDate).format('MM/YYYY')}
+                        {project.endDate
+                           ? dayjs(project.endDate).format('MM/YYYY')
+                           : 'Ongoing'}
                      </Text>
                   </View>
                )}
                {project.projectLink && (
                   <View style={styles.infoWithIcon}>
                      <LinkIcon style={styles.icon} />
-                     <Text style={styles.projectLink}>
+                     <Link
+                        href={project.projectLink}
+                        style={styles.projectLink}
+                     >
                         {project.projectLink}
-                     </Text>
+                     </Link>
                   </View>
                )}
                {project.description && (

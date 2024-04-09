@@ -15,6 +15,10 @@ import Skills from './resumeView/Skills';
 import Languages from './resumeView/Languages';
 
 const styles = StyleSheet.create({
+   document: {
+      display: 'flex',
+      justifyContent: 'center',
+   },
    page: {
       padding: 30,
       fontFamily: 'Lato',
@@ -49,10 +53,10 @@ const styles = StyleSheet.create({
 });
 
 const ResumeView = ({ selectedResume }) => {
-   const resume = selectedResume || sampleResume;
+   const resume = selectedResume;
 
    return (
-      <Document>
+      <Document style={styles.document}>
          <Page size="A4" style={styles.page}>
             <View style={styles.container}>
                <View style={styles.header}>

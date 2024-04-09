@@ -43,6 +43,11 @@ const config = {
          component: TextField,
          label: 'Location',
       },
+      {
+         id: 'link',
+         component: TextField,
+         label: 'Link',
+      },
    ],
    education: [
       {
@@ -102,6 +107,7 @@ const config = {
          component: TextField,
          label: 'Work Description',
          multiline: true,
+         rows: 5,
       },
       {
          id: 'startDate',

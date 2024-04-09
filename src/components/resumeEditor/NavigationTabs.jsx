@@ -13,6 +13,7 @@ function FormNav({ config, setActiveTab, activeTab }) {
             boxShadow: 1,
             borderRadius: 2,
             p: 2,
+            flexShrink: 0,
          }}
       >
          {Object.keys(config).map((key, index) => {

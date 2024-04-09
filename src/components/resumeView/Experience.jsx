@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
    },
    description: {
       fontSize: 12,
+      fontWeight: 'light',
+      color: '#384347',
    },
    duration: {
       fontSize: 10,
@@ -72,7 +74,10 @@ const Experience = ({ experienceData }) => (
                            {' '}
                            {dayjs(experience.startDate).format(
                               'MM/YYYY'
-                           )} - {dayjs(experience.endDate).format('MM/YYYY')}
+                           )} -{' '}
+                           {experience.endDate
+                              ? dayjs(experience.endDate).format('MM/YYYY')
+                              : 'Ongoing'}
                         </Text>
                      </>
                   )}
@@ -85,11 +90,21 @@ const Experience = ({ experienceData }) => (
                      </>
                   )}
                </View>
-               {experience.workDescription && (
-                  <Text style={styles.description}>
-                     {experience.workDescription}
-                  </Text>
-               )}
+               {experience.workDescription
+                  .split('*')
+                  .filter((paragraph) => paragraph.trim() !== '')
+                  .map((paragraph, i) => (
+                     <Text
+                        key={i}
+                        style={{
+                           ...styles.description,
+                           marginLeft: i !== 0 ? 10 : 0,
+                        }}
+                     >
+                        {i !== 0 ? '- ' : ''}
+                        {paragraph.trim()}
+                     </Text>
+                  ))}
             </View>
          ))}
       </View>
