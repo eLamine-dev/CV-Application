@@ -133,7 +133,7 @@ const config = {
          component: TextField,
          multiline: true,
          label: 'Project Description',
-         required: true,
+         rows: 4,
       },
       {
          id: 'projectLink',

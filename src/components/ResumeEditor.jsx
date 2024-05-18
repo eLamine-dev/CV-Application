@@ -11,23 +11,52 @@ function ResumeEditor({ selectedResume, setSelectedResume, onSaveEntry }) {
    };
 
    const handleSaveEntry = (data) => {
-      const updatedResume = {
-         ...selectedResume,
-         [activeTab]: data.id
-            ? selectedResume[activeTab].map((entry) =>
-                 entry.id === data.id ? { ...entry, ...data } : entry
-              )
-            : (selectedResume[activeTab] ?? []).length > 0
-            ? [
-                 ...selectedResume[activeTab],
-                 { id: Date.now().toString(), ...data },
-              ]
-            : [{ id: Date.now().toString(), ...data }],
-      };
+      let updatedResume;
+
+      if (activeTab === 'general info') {
+         updatedResume = {
+            ...selectedResume,
+            'general info': [{ ...data, id: 'gi01' }],
+         };
+      } else {
+         updatedResume = {
+            ...selectedResume,
+            [activeTab]: data.id
+               ? selectedResume[activeTab].map((entry) =>
+                    entry.id === data.id ? { ...entry, ...data } : entry
+                 )
+               : (selectedResume[activeTab] ?? []).length > 0
+               ? [
+                    ...selectedResume[activeTab],
+                    { id: Date.now().toString(), ...data },
+                 ]
+               : [{ id: Date.now().toString(), ...data }],
+         };
+      }
 
       setSelectedResume(updatedResume);
       onSaveEntry(updatedResume);
    };
+
+   // const handleSaveEntry = (data) => {
+   //    const updatedResume = {
+   //       ...selectedResume,
+
+   //       [activeTab]: data.id
+   //          ? selectedResume[activeTab].map((entry) =>
+   //               entry.id === data.id ? { ...entry, ...data } : entry
+   //            )
+   //          : (selectedResume[activeTab] ?? []).length > 0
+   //          ? [
+   //               ...selectedResume[activeTab],
+   //               { id: Date.now().toString(), ...data },
+   //            ]
+   //          : [{ id: Date.now().toString(), ...data }],
+   //    };
+
+   //    setSelectedResume(updatedResume);
+   //    onSaveEntry(updatedResume);
+   // };
 
    const handleDeleteEntry = (id) => {
       const updatedResume = {
