@@ -14,12 +14,11 @@ const styles = StyleSheet.create({
    entries: {
       display: 'flex',
       flexDirection: 'column',
+      gap: 12,
    },
    entry: {
       display: 'flex',
       flexDirection: 'column',
-      marginBottom: 10,
-      gap: 6,
    },
    projectName: {
       fontSize: 16,

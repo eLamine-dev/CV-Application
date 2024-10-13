@@ -69,18 +69,73 @@ const sampleResume = {
          startDate: dayjs('2011-11-11'),
          endDate: dayjs('2015-05-05'),
       },
+      {
+         id: 'pr02',
+         projectName: 'E-commerce Platform',
+         description:
+            'Built an e-commerce platform for selling products online.',
+         projectLink: 'https://example.com/ecommerce',
+         startDate: dayjs('2011-11-11'),
+         endDate: dayjs('2015-05-05'),
+      },
+      {
+         id: 'pr03',
+         projectName: 'Mobile App',
+         description: 'Developed a mobile application for iOS and Android.',
+         projectLink: 'https://example.com/mobile-app',
+         startDate: dayjs('2011-11-11'),
+         endDate: dayjs('2015-05-05'),
+      },
+      {
+         id: 'pr04',
+         projectName: 'Web Application',
+         description: 'Built a web application for data management.',
+         projectLink: 'https://example.com/web-app',
+         startDate: dayjs('2011-11-11'),
+         endDate: dayjs('2015-05-05'),
+      },
    ],
    skills: [
       {
          id: 'sl01',
          skillName: 'JavaScript',
       },
+      {
+         id: 'sl02',
+         skillName: 'React',
+      },
+      {
+         id: 'sl03',
+         skillName: 'Node.js',
+      },
+      {
+         id: 'sl04',
+         skillName: 'HTML/CSS',
+      },
+      {
+         id: 'sl05',
+         skillName: 'Python',
+      },
+      {
+         id: 'sl06',
+         skillName: 'Django',
+      },
    ],
    languages: [
       {
          id: 'lg01',
-         language: 'English',
+         language: 'Arabic',
          proficiency: 'Native',
+      },
+      {
+         id: 'lg01',
+         language: 'English',
+         proficiency: 'Fluent',
+      },
+      {
+         id: 'lg01',
+         language: 'French',
+         proficiency: 'Intermediate',
       },
    ],
 };

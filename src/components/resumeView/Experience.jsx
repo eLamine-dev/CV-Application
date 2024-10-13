@@ -12,12 +12,12 @@ const styles = StyleSheet.create({
    },
    entries: {
       display: 'flex',
-
+      gap: 12,
       flexDirection: 'column',
    },
    entry: {
       display: 'flex',
-      gap: 6,
+      gap: 4,
       flexDirection: 'column',
    },
    position: {
