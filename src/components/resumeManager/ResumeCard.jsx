@@ -57,7 +57,7 @@ const styles = {
 
 const ResumeCard = ({ resume, onOpenInEditor, onMakeCopy, onDeleteResume }) => {
    return (
-      <Card sx={{ boxShadow: 0 }}>
+      <Card sx={{ boxShadow: 0, backgroundColor: '#f5f5f9' }}>
          <CardContent>
             <Grid
                spacing={4}

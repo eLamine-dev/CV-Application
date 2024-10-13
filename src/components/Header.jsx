@@ -8,7 +8,8 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import RocketIcon from '@mui/icons-material/Rocket';
+
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 
 const settings = ['Dashboard', 'Logout'];
 
@@ -41,10 +42,10 @@ function Header({ showResumeManager }) {
             }}
             disableGutters
          >
-            <RocketIcon
+            <HistoryEduIcon
                sx={{
                   // rotate: '10deg',
-                  color: 'red',
+                  color: 'blue',
                   mr: 1,
                   fontSize: '3rem',
                   pb: 0.5,
@@ -60,7 +61,7 @@ function Header({ showResumeManager }) {
                   fontWeight: 700,
                }}
             >
-               RocketCV
+               CVBuilder
             </Typography>
 
             <Box sx={{ flexGrow: 0 }}>
